@@ -5,7 +5,7 @@ import SpawnGuiFromIni
 import tkinter as tk
 
 # The following line of code calls the GUI builder class defined in the "SpawnGuiFromIni.py" file.
-appWindowCfgFileName = 'GuiConfigSmall.ini'
+appWindowCfgFileName = 'GuiConfig.ini'
 path = os.path.dirname(os.path.realpath(__file__))
 appWindowCfgFile = os.path.join(path, appWindowCfgFileName)
 
