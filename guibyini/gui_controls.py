@@ -1,11 +1,14 @@
 __author__ = 'chris.maue'
 
 def callback(parent, num):
+    global appRunning
     if num == 1:
         print('F1 pressed')
+        appRunning = 1
         pass
     if num == 2:
         print('F2 pressed')
+        appRunning = 0
         pass
     if num == 3:
         print('F3 pressed')
@@ -42,6 +45,7 @@ def callback(parent, num):
         print('Attempting to close application')
         try:
             parent.destroy()
+            parent.run = 0
             print('Application closed')
         except:
             print('Application already closed')

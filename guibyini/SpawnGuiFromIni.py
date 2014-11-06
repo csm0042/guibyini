@@ -1,5 +1,3 @@
-# cmd /k c:\python34\python.exe "C:\Users\cmaue\OneDrive\MyPythonProjects\OPC_Tool\OPC_Tool\Main.py"
-
 import tkinter as tk
 import config_parser
 import widget_count
@@ -48,10 +46,9 @@ class SpawnAppWindow:
 
 
     def initialize(self):
-        # Spawn main window
+        global appRunning
         self.windowSection = 'main window'
         self.DrawWindow()
-
         # Add frames
         self.frameCount = widget_count.CountWidgetByType(self.windowIniFile, "frame")
         self.framesCreated = 0
@@ -59,7 +56,6 @@ class SpawnAppWindow:
             self.framesCreated += 1
             self.frameSection = "frame" + str(self.framesCreated)
             self.frame[self.framesCreated] = self.DrawFrame()
-
         # Add buttons
         self.buttonCount = widget_count.CountWidgetByType(self.windowIniFile, "button")
         self.buttonsCreated = 0
@@ -67,7 +63,6 @@ class SpawnAppWindow:
             self.buttonsCreated += 1
             self.buttonSection = "button" + str(self.buttonsCreated)
             self.button[self.buttonsCreated] = self.DrawButton()
-
         # Add text
         self.textCount = widget_count.CountWidgetByType(self.windowIniFile, "text")
         self.textCreated = 0
@@ -97,7 +92,6 @@ class SpawnAppWindow:
 
 
     def DrawFrame(self):
-
         self.frameBackgroundColor = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'background color')
         self.frameBorderwidth = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'borderwidth')
         self.frameClass = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'class')
@@ -164,6 +158,7 @@ class SpawnAppWindow:
 
 
     def DrawButton(self):
+        global appRunning
         self.buttonBackgroundColor = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
                                                                     'background color')
         self.buttonBitmap = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'bitmap')
@@ -287,8 +282,6 @@ class SpawnAppWindow:
         if self.textBorderWidth != "": self.text.config(bd=self.textBorderWidth)
         if self.textFont != "" and self.textFontSize != "": self.text.config(font=(self.textFont,
                                                                                    int(self.textFontSize)))
-
-
         # Pull text widget place parameters from INI file and apply them to text widget
         self.textPlaceAnchor = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place anchor')
         self.textPlaceBordermode = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection,
@@ -313,11 +306,6 @@ class SpawnAppWindow:
         if self.textPlaceRelX != '': self.text.place_configure(relx=int(self.textPlaceRelX))
         if self.textPlaceOffsetY != '': self.text.place_configure(y=int(self.textPlaceOffsetY))
         if self.textPlaceRelY != '': self.text.place_configure(rely=int(self.textPlaceRelY))
-
-
-
-
-
 
 
 
