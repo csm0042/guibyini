@@ -97,124 +97,225 @@ class SpawnAppWindow:
 
 
     def DrawFrame(self):
-        self.frame = tk.Frame(self.parent)
-        self.frameAnchor = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'anchor')
-        self.frameSizeX = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'size_x')
-        self.frameSizeY = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'size_y')
-        self.framePosX = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'pos_x')
-        self.framePosY = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'pos_y')
-        self.frame.place(anchor=self.frameAnchor, height=int(self.frameSizeY), width=int(self.frameSizeX),
-                         x=int(self.framePosX), y=int(self.framePosY))
-        self.frameBorderWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'border_width')
-        if self.frameBorderWidth != '':
-            self.frame.config(borderwidth=int(self.frameBorderWidth))
+
+        self.frameBackgroundColor = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'background color')
+        self.frameBorderwidth = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'borderwidth')
+        self.frameClass = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'class')
+        self.frameColormap = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'colormap')
+        self.frameContainer = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'container')
+        self.frameCursor = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'cursor')
+        self.frameHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'height')
+        self.frameHighlightBackground = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'highlight background')
+        self.frameHighlightColor = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'highlight color')
+        self.frameHighlightThickness = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'highlight thickness')
+        self.framePadX = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'padx')
+        self.framePadY = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'pady')
         self.frameRelief = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'relief')
-        if self.frameRelief != '':
-            self.frame.config(relief=self.frameRelief)
+        self.frameTakeFocus = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'take focus')
+        self.frameVisual = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'visual')
+        self.frameWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'width')
+        self.frame = tk.Frame()
+        if self.frameBackgroundColor != '': self.frame.config(background=self.frameBackgroundColor)
+        if self.frameBorderwidth != '': self.frame.config(borderwidth=int(self.frameBorderwidth))
+        #if self.frameClass != '': self.frame.config(class=self.frameClass)
+        if self.frameColormap != '': self.frame.config(colormap=self.frameColormap)
+        if self.frameContainer != '': self.frame.config(container=self.frameContainer)
+        if self.frameCursor != '': self.frame.config(cursor=self.frameCursor)
+        if self.frameHeight != '': self.frame.config(height=int(self.frameHeight))
+        if self.frameHighlightBackground != '': self.frame.config(highlightbackground=self.frameHighlightBackground)
+        if self.frameHighlightColor != '': self.frame.config(highlightcolor=self.frameHighlightColor)
+        if self.frameHighlightThickness != '': self.frame.config(highlightthickness=int(self.frameHighlightThickness))
+        if self.framePadX != '': self.frame.config(padx=int(self.framePadX))
+        if self.framePadY != '': self.frame.config(pady=int(self.framePadY))
+        if self.frameRelief != '': self.frame.config(relief=self.frameRelief)
+        if self.frameTakeFocus != '': self.frame.config(takefocus=self.frameTakeFocus)
+        if self.frameVisual != '': self.frame.config(visual=self.frameVisual)
+        if self.frameWidth != '': self.frame.config(width=int(self.frameWidth))
+
+        # Pull frame widget place parameters from INI file and apply them to frame widget
+        self.framePlaceAnchor = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'place anchor')
+        self.framePlaceBordermode = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection,
+                                                                    'place bordermode')
+        self.framePlaceHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'place height')
+        self.framePlaceWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'place width')
+        self.framePlaceRelHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection,
+                                                                   'place relheight')
+        self.framePlaceRelWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection,
+                                                                  'place relwidth')
+        self.framePlaceRelX = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'place rel x')
+        self.framePlaceRelY = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection, 'place rel y')
+        self.framePlaceOffsetX = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection,
+                                                                 'place offset x')
+        self.framePlaceOffsetY = config_parser.ConfigSectionMap(self.windowIniFile, self.frameSection,
+                                                                 'place offset y')
+        self.frame.place()
+        if self.framePlaceAnchor != '': self.frame.place_configure(anchor=self.framePlaceAnchor)
+        if self.framePlaceBordermode != '': self.frame.place_configure(bordermode=self.framePlaceBordermode)
+        if self.framePlaceHeight != '': self.frame.place_configure(height=int(self.framePlaceHeight))
+        if self.framePlaceRelHeight != '': self.frame.place_configure(relheight=int(self.framePlaceRelHeight))
+        if self.framePlaceWidth != '': self.frame.place_configure(width=int(self.framePlaceWidth))
+        if self.framePlaceRelWidth != '': self.frame.place_configure(relwidth=int(self.framePlaceRelWidth))
+        if self.framePlaceOffsetX != '': self.frame.place_configure(x=int(self.framePlaceOffsetX))
+        if self.framePlaceRelX != '': self.frame.place_configure(relx=int(self.framePlaceRelX))
+        if self.framePlaceOffsetY != '': self.frame.place_configure(y=int(self.framePlaceOffsetY))
+        if self.framePlaceRelY != '': self.frame.place_configure(rely=int(self.framePlaceRelY))
 
 
 
 
     def DrawButton(self):
-        self.buttonAnchor = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'anchor')
-        self.buttonSizeX = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'size_x')
-        self.buttonSizeY = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'size_y')
-        self.buttonPosX = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'pos_x')
-        self.buttonPosY = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'pos_y')
-        self.button = tk.Button(height=int(self.buttonSizeY), width=int(self.buttonSizeX))
-        self.button.place(anchor=self.buttonAnchor, height=int(self.buttonSizeY), width=int(self.buttonSizeX),
-                          x=int(self.buttonPosX), y=int(self.buttonPosY))
-
         self.buttonBackgroundColor = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
                                                                     'background color')
-        if self.buttonBackgroundColor != '':
-            self.button.config(background=self.buttonBackgroundColor)
-
         self.buttonBitmap = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'bitmap')
-        if self.buttonBitmap != '':
-            self.button.config(bitmap=self.buttonBitmap)
-
-        self.buttonText = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'text')
-        if self.buttonText != '':
-            self.button.config(text=self.buttonText)
-
-        self.buttonBorderWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'borderwidth')
-        if self.buttonBorderWidth != '':
-            self.button.config(borderwidth=self.buttonBorderWidth)
-
-        self.buttonRelief = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'relief')
-        if self.buttonRelief != '':
-            self.button.config(relief=self.buttonRelief)
-
+        self.buttonBorderwidth = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'borderwidth')
+        self.buttonCommand = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'command')
+        self.buttonCompound = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'compound')
+        self.buttonCursor = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'cursor')
+        self.buttonDefault = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'default')
+        self.buttonDisableForeground = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                      'disable foreground')
+        self.buttonFont = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'font')
+        self.buttonFontSize = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'font size')
+        self.buttonForegroundColor = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                    'foreground color')
+        self.buttonHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'height')
+        self.buttonHighlightBackground = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                        'highlight background')
+        self.buttonHighlightColor = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                   'highlight color')
+        self.buttonHighlightThickness = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                       'highlight thinkness')
+        self.buttonImage = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'image')
         self.buttonJustify = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'justify')
-        if self.buttonJustify != '':
-            self.button.config(justify=self.buttonJustify)
+        self.buttonOverRelief = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'over relief')
+        self.buttonPadX = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'padx')
+        self.buttonPadY = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'pady')
+        self.buttonRelief = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'relief')
+        self.buttonRepeatDelay = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'repeat delay')
+        self.buttonRepeatInterval = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                   'repeat interval')
+        self.buttonState = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'state')
+        self.buttonTakeFocus = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'take focus')
+        self.buttonText = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'text')
+        self.buttonTextVariable = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                 'text variable')
+        self.buttonUnderline = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'underline')
+        self.buttonWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'width')
+        self.buttonWrapLength = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'wrap length')
 
-        self.buttonTextWrapLength = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
-                                                                   'wraplength')
-        if self.buttonTextWrapLength != '':
-            self.button.config(wraplength=self.buttonTextWrapLength)
+        self.button = tk.Button()
+        if self.buttonBackgroundColor != '': self.button.config(background=self.buttonBackgroundColor)
+        if self.buttonBitmap != '': self.button.config(bitmap=self.buttonBitmap)
+        if self.buttonBorderwidth != '': self.button.config(borderwidth=int(self.buttonBorderwidth))
+        if self.buttonCommand != '': self.button.config(command=lambda instance=int(self.buttonCommand):
+                                                        gui_controls.callback(self.parent, instance))
+        if self.buttonCompound != '': self.button.config(compound=self.buttonCompound)
+        if self.buttonCursor != '': self.button.config(cursor=self.buttonCursor)
+        if self.buttonDefault != '': self.button.config(default=self.buttonDefault)
+        if self.buttonDisableForeground != '': self.button.config(disableforeground=self.buttonDisableForeground)
+        if self.buttonFont != '': self.button.config(font=(self.buttonFont, int(self.buttonFontSize)))
+        if self.buttonForegroundColor != '': self.button.config(foreground=self.buttonForegroundColor)
+        if self.buttonHeight != '': self.button.config(height=int(self.buttonHeight))
+        if self.buttonHighlightBackground != '': self.button.config(highlightbackground=self.buttonCommand)
+        if self.buttonHighlightColor != '': self.button.config(highlightcolor=self.buttonCommand)
+        if self.buttonHighlightThickness != '': self.button.config(highlightthickness=int(self.buttonHighlightThickness))
+        if self.buttonImage != '': self.button.config(image=self.buttonImage)
+        if self.buttonJustify != '': self.button.config(justify=self.buttonJustify)
+        if self.buttonOverRelief != '': self.button.config(overrelief=self.buttonOverRelief)
+        if self.buttonPadX != '': self.button.config(padx=int(self.buttonPadX))
+        if self.buttonPadY != '': self.button.config(pady=int(self.buttonPadY))
+        if self.buttonRelief != '': self.button.config(relief=self.buttonRelief)
+        if self.buttonRepeatDelay != '': self.button.config(repeatdelay=int(self.buttonRepeatDelay))
+        if self.buttonRepeatInterval != '': self.button.config(repeatinterval=int(self.buttonRepeatInterval))
+        if self.buttonState != '': self.button.config(state=self.buttonState)
+        if self.buttonTakeFocus != '': self.button.config(takefocus=self.buttonTakeFocus)
+        if self.buttonText != '': self.button.config(text=self.buttonText)
+        if self.buttonTextVariable != '': self.button.config(textvariable=self.buttonTextVariable)
+        if self.buttonUnderline != '': self.button.config(underline=int(self.buttonUnderline))
+        if self.buttonWidth != '': self.button.config(width=int(self.buttonWidth))
+        if self.buttonWrapLength != '': self.button.config(wraplength=int(self.buttonWrapLength))
 
-        self.buttonCmd = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'command')
-        if self.buttonCmd != '':
-            self.button.config(command=lambda instance = int(self.buttonCmd):
-                                gui_controls.callback(self.parent, instance))
+        # Pull button widget place parameters from INI file and apply them to button widget
+        self.buttonPlaceAnchor = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'place anchor')
+        self.buttonPlaceBordermode = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                    'place bordermode')
+        self.buttonPlaceHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'place height')
+        self.buttonPlaceWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'place width')
+        self.buttonPlaceRelHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                   'place relheight')
+        self.buttonPlaceRelWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                  'place relwidth')
+        self.buttonPlaceRelX = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'place rel x')
+        self.buttonPlaceRelY = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection, 'place rel y')
+        self.buttonPlaceOffsetX = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                 'place offset x')
+        self.buttonPlaceOffsetY = config_parser.ConfigSectionMap(self.windowIniFile, self.buttonSection,
+                                                                 'place offset y')
+        self.button.place()
+        if self.buttonPlaceAnchor != '': self.button.place_configure(anchor=self.buttonPlaceAnchor)
+        if self.buttonPlaceBordermode != '': self.button.place_configure(bordermode=self.buttonPlaceBordermode)
+        if self.buttonPlaceHeight != '': self.button.place_configure(height=int(self.buttonPlaceHeight))
+        if self.buttonPlaceRelHeight != '': self.button.place_configure(relheight=int(self.buttonPlaceRelHeight))
+        if self.buttonPlaceWidth != '': self.button.place_configure(width=int(self.buttonPlaceWidth))
+        if self.buttonPlaceRelWidth != '': self.button.place_configure(relwidth=int(self.buttonPlaceRelWidth))
+        if self.buttonPlaceOffsetX != '': self.button.place_configure(x=int(self.buttonPlaceOffsetX))
+        if self.buttonPlaceRelX != '': self.button.place_configure(relx=int(self.buttonPlaceRelX))
+        if self.buttonPlaceOffsetY != '': self.button.place_configure(y=int(self.buttonPlaceOffsetY))
+        if self.buttonPlaceRelY != '': self.button.place_configure(rely=int(self.buttonPlaceRelY))
+
 
 
 
 
     def DrawText(self):
-        # Create text widget
-        self.text = tk.Text(self.parent)
-        # Feed desired text to widget to display
+        # Pull configuration from INI file for text field
         self.textToDisplay = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'text')
-        if self.textToDisplay != "":
-            self.text.insert(tk.INSERT, self.textToDisplay)
-        # Set word-wrap option
         self.textWrap = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'wrap')
-        if self.textWrap != "":
-            self.text.config(wrap=self.textWrap)
         self.textBackgroundColor = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection,
                                                                   'background color')
-        if self.textBackgroundColor != "":
-            self.text.config(bg=self.textBackgroundColor)
         self.textPadX = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'pad x')
-        if self.textPadX != "":
-            self.text.config(padx=self.textPadX)
         self.textPadY = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'pad y')
-        if self.textPadY != "":
-            self.text.config(pady=self.textPadY)
         self.textBorderWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'border width')
-        if self.textBorderWidth != "":
-            self.text.config(bd=self.textBorderWidth)
         self.textFont = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'font')
         self.textFontSize = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'font size')
-        if self.textFont != "" and self.textFontSize != "":
-            self.text.config(font=(self.textFont, int(self.textFontSize)))
+        self.text = tk.Text()
+        if self.textToDisplay != "": self.text.insert(tk.INSERT, self.textToDisplay)
+        if self.textWrap != "": self.text.config(wrap=self.textWrap)
+        if self.textBackgroundColor != "": self.text.config(bg=self.textBackgroundColor)
+        if self.textPadX != "": self.text.config(padx=self.textPadX)
+        if self.textPadY != "": self.text.config(pady=self.textPadY)
+        if self.textBorderWidth != "": self.text.config(bd=self.textBorderWidth)
+        if self.textFont != "" and self.textFontSize != "": self.text.config(font=(self.textFont,
+                                                                                   int(self.textFontSize)))
 
-        # Set "place" parameters to place text widget into the correct location in the application window
-        self.textAnchor = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place anchor')
-        self.textSizeX = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place width')
-        self.textSizeY = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place height')
-        self.textOffsetX = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place offset x')
-        self.textOffsetY = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place offset y')
-        self.text.place(anchor=self.textAnchor, height=int(self.textSizeY), width=int(self.textSizeX),
-                          x=int(self.textOffsetX), y=int(self.textOffsetY))
-        #self.textBorderMode = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place bordermode')
-        #if self.textBorderMode != "":
-        #    self.text.config(bordermode=self.textBorderMode)
-        #self.textRelHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place relheight')
-        #if self.textRelHeight != "":
-        #    self.text.config(relheight=self.textRelHeight)
-        #self.textRelWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place relwidth')
-        #if self.textRelWidth != "":
-        #    self.text.config(relwidth=self.textRelWidth)
-        #self.textRelX = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place rel x')
-        #if self.textRelX != "":
-        #    self.text.config(relx=self.textRelX)
-        #self.textRelY = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place rel y')
-        #if self.textRelY != "":
-        #    self.text.config(rely=self.textRelY)
+
+        # Pull text widget place parameters from INI file and apply them to text widget
+        self.textPlaceAnchor = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place anchor')
+        self.textPlaceBordermode = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection,
+                                                                  'place bordermode')
+        self.textPlaceHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place height')
+        self.textPlaceWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place width')
+        self.textPlaceRelHeight = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection,
+                                                                 'place relheight')
+        self.textPlaceRelWidth = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place relwidth')
+        self.textPlaceRelX = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place rel x')
+        self.textPlaceRelY = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place rel y')
+        self.textPlaceOffsetX = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place offset x')
+        self.textPlaceOffsetY = config_parser.ConfigSectionMap(self.windowIniFile, self.textSection, 'place offset y')
+        self.text.place()
+        if self.textPlaceAnchor != '': self.text.place_configure(anchor=self.textPlaceAnchor)
+        if self.textPlaceBordermode != '': self.text.place_configure(bordermode=self.textPlaceBordermode)
+        if self.textPlaceHeight != '': self.text.place_configure(height=int(self.textPlaceHeight))
+        if self.textPlaceRelHeight != '': self.text.place_configure(relheight=int(self.textPlaceRelHeight))
+        if self.textPlaceWidth != '': self.text.place_configure(width=int(self.textPlaceWidth))
+        if self.textPlaceRelWidth != '': self.text.place_configure(relwidth=int(self.textPlaceRelWidth))
+        if self.textPlaceOffsetX != '': self.text.place_configure(x=int(self.textPlaceOffsetX))
+        if self.textPlaceRelX != '': self.text.place_configure(relx=int(self.textPlaceRelX))
+        if self.textPlaceOffsetY != '': self.text.place_configure(y=int(self.textPlaceOffsetY))
+        if self.textPlaceRelY != '': self.text.place_configure(rely=int(self.textPlaceRelY))
+
+
+
 
 
 
