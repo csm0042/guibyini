@@ -4,22 +4,174 @@ import widget_count
 import gui_controls
 
 
+class PlaceSettings(object):
+    def __init__(self):
+        self.anchor = str()
+        self.bordermode = str()
+        self.height = int()
+        self.width = int()
+        self.relHeight = float()
+        self.relWidth = float()
+        self.relX = float()
+        self.relY = float()
+        self.offsetX = int()
+        self.offsetY = int()
+
+
+class FrameWidget(object):
+    def __init__(self):
+        self.backgroundColor = str()
+        self.borderwidth = int()
+        self.colormap = str()
+        self.container = str()
+        self.cursor = str()
+        self.height = int()
+        self.highlightBackgroundColor = str()
+        self.highlightColor = str()
+        self.highlightThickness = int()
+        self.padX = int()
+        self.padY = int()
+        self.relief = str()
+        self.takeFocus = str()
+        self.visual = str()
+        self.width = int()
+
+
+class MessageWidget(object):
+    def __init__(self):
+        self.anchor = str()
+        self.aspect = str()
+        self.backgroundColor = str()
+        self.borderwidth = int()
+        self.cursor = str()
+        self.font = str()
+        self.fontSize = int()
+        self.foregroundColor = str()
+        self.highlightBackground = str()
+        self.highlightBackgroundColor = str()
+        self.highlightThickness = int()
+        self.justify = str()
+        self.padX = int()
+        self.padY = int()
+        self.relief = str()
+        self.takeFocus = str()
+        self.text = str()
+        self.textVariable = str()
+        self.width = int()
+
+
+class TextWidget(object):
+    def __init__(self):
+        self.autoSeparators = str()
+        self.backgroundColor = str()
+        self.backgroundStipple = str()
+        self.borderwidth = int()
+        self.cursor = str()
+        self.exportSelection = str()
+        self.font = str()
+        self.fontSize = int()
+        self.foregroundColor = str()
+        self.foregroundStipple = str()
+        self.height = int()
+        self.highlightBackgroundColor = str()
+        self.highlightColor = str()
+        self.highlightThickness = int()
+        self.insertBackground = str()
+        self.insertBorderwidth = int()
+        self.insertOffTime = int()
+        self.insertOnTime = int()
+        self.insertWidth = int()
+        self.justify = str()
+        self.lmargin1 = str()
+        self.lmargin2 = str()
+        self.maxUndo = int()
+        self.padX = int()
+        self.padY = int()
+        self.offset = str()
+        self.overstrike = str()
+        self.relief = str()
+        self.rmargin = int()
+        self.selectBackgroundColor = str()
+        self.selectForegroundColor = str()
+        self.selectBorderwidth = int()
+        self.setGrid = str()
+        self.spacing1 = int()
+        self.spacing2 = int()
+        self.spacing3 = int()
+        self.state = str()
+        self.tabs = str()
+        self.takeFocus = str()
+        self.text = str()
+        self.underline = str()
+        self.undo = str()
+        self.width = int()
+        self.wrap = str()
+        self.xScrollCommand = str()
+        self.yScrollCommand = str()
+
+
+class ButtonWidget(object):
+    def __init__(self):
+        self.activeBackgroundColor = str()
+        self.activeForegroundColor = str()
+        self.anchor = str()
+        self.backgroundColor = str()
+        self.bitmap = str()
+        self.borderwidth = int()
+        self.command = int()
+        self.compound = str()
+        self.cursor = str()
+        self.default = str()
+        self.disabledForeground = str()
+        self.font = str()
+        self.fontSize = int()
+        self.foregroundColor = str()
+        self.height = int()
+        self.highlightBackgroundColor = str()
+        self.highlightColor = str()
+        self.highlightThickness = int()
+        self.image = str()
+        self.justify = str()
+        self.overRelief = str()
+        self.padX = int()
+        self.padY = int()
+        self.relief = str()
+        self.repeatDelay = int()
+        self.repeatInterval = int()
+        self.state = str()
+        self.takeFocus = str()
+        self.text = str()
+        self.textVariable = str()
+        self.underline = str()
+        self.width = int()
+        self.wrapLength = int()
+
 
 class SpawnAppWindow:
     def __init__(self, parent, windowIniFile):
         self.parent = parent
         self.frame = tk.Frame(self.parent)
         self.windowIniFile = windowIniFile
+
         self.frameCount = widget_count.CountWidgetByType(self.windowIniFile, "frame")
         self.framesCreated = int()
+        self.frames = FrameWidget()
+
         self.messageCount = widget_count.CountWidgetByType(self.windowIniFile, "message")
         self.messageCreated = int()
+        self.messages = MessageWidget()
+
         self.textCount = widget_count.CountWidgetByType(self.windowIniFile, "text")
         self.textCreated = int()
+        self.text = MessageWidget()
+
         self.buttonCount = widget_count.CountWidgetByType(self.windowIniFile, "button")
         self.buttonCreated = int()
+        self.buttons = ButtonWidget()
+
         self.entryCount = widget_count.CountWidgetByType(self.windowIniFile, "entry")
         self.entryCreated = int()
+
         self.windowSection = str()
         self.initialize()
 
