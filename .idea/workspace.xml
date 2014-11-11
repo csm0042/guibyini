@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="488a74ab-b520-4c7b-9b4b-c4722243d446" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\GuiConfig.ini" afterPath="" />
-      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\parseFromIni.py" afterPath="" />
-      <change type="MOVED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\generate_gui.py" afterPath="$PROJECT_DIR$/guibyini/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="guibyini.iws" />
@@ -472,7 +469,11 @@
       <created>1415733535960</created>
       <updated>1415733535960</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="General updates">
+      <created>1415733669292</created>
+      <updated>1415733669292</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
