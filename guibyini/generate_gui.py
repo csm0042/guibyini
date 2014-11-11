@@ -6,10 +6,7 @@ import tkinter as tk
 import threading
 import time
 
-appRunning = 0
 
-# This class creates a separate thread to run the application window and its objects.  This allows background
-# code to continue to operate independent of the tkinter main loop.
 class AppWindow(threading.Thread):
     def __init__(self, IniFile):
         self.IniFile = IniFile
