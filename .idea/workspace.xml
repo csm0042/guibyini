@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="488a74ab-b520-4c7b-9b4b-c4722243d446" name="Default" comment="General updates">
-      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\tkinterButtonClass.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\tkinterFrameClass.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\tkinterMessageClass.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\tkinterTextClass.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py" afterPath="$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/gui.ini" afterPath="$PROJECT_DIR$/guibyini/gui.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/tkinterButton.py" afterPath="$PROJECT_DIR$/guibyini/tkinterButton.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/tkinterFrame.py" afterPath="$PROJECT_DIR$/guibyini/tkinterFrame.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/tkinterMessage.py" afterPath="$PROJECT_DIR$/guibyini/tkinterMessage.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/tkinterPlace.py" afterPath="$PROJECT_DIR$/guibyini/tkinterPlace.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/tkinterText.py" afterPath="$PROJECT_DIR$/guibyini/tkinterText.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/tkinterWindow.py" afterPath="$PROJECT_DIR$/guibyini/tkinterWindow.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="488a74ab-b520-4c7b-9b4b-c4722243d446" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\GuiConfig.ini" afterPath="" />
+      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\parseFromIni.py" afterPath="" />
+      <change type="MOVED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\generate_gui.py" afterPath="$PROJECT_DIR$/guibyini/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="guibyini.iws" />
@@ -38,10 +28,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SpawnGuiFromIni.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SpawnGuiFromIni.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.2869954" vertical-offset="4550" max-vertical-offset="7208">
+            <state vertical-scroll-proportion="-118.40351" vertical-offset="0" max-vertical-offset="7208">
               <caret line="397" column="47" selection-start-line="397" selection-start-column="47" selection-end-line="397" selection-end-column="47" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
@@ -55,6 +45,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="11952" max-vertical-offset="13583">
               <caret line="667" column="21" selection-start-line="667" selection-start-column="21" selection-end-line="667" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gui_controls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/guibyini/gui_controls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1496">
+              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/guibyini/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.56198347" vertical-offset="0" max-vertical-offset="726">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -84,7 +94,6 @@
         <option value="$PROJECT_DIR$/../pic-rename/pic-rename/FileRenameGUI.log" />
         <option value="$PROJECT_DIR$/../pic-rename/pic-rename/FileRenameGUI.py" />
         <option value="$PROJECT_DIR$/../pic-rename/pic-rename/file-rename.py" />
-        <option value="$PROJECT_DIR$/guibyini/GuiConfig.ini" />
         <option value="$PROJECT_DIR$/guibyini/generate_gui.py" />
         <option value="$PROJECT_DIR$/../pic-rename/pic-rename/gui.ini" />
         <option value="$PROJECT_DIR$/guibyini/read_gui_settings_from_ini.py" />
@@ -96,6 +105,9 @@
         <option value="$PROJECT_DIR$/guibyini/tkinterButton.py" />
         <option value="$PROJECT_DIR$/guibyini/gui.ini" />
         <option value="$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py" />
+        <option value="$PROJECT_DIR$/guibyini/parseFromIni.py" />
+        <option value="$PROJECT_DIR$/guibyini/GuiConfig.ini" />
+        <option value="$PROJECT_DIR$/guibyini/main.py" />
       </list>
     </option>
   </component>
@@ -190,7 +202,7 @@
       <recent name="C:\Users\cmaue\OneDrive\MyPythonProjects\guibyini\guibyini" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.SpawnGuiFromIni">
+  <component name="RunManager" selected="Python.main">
     <configuration default="false" name="gui-by-ini" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -203,7 +215,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="guibyini" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/guibyini/generate_gui.py" />
+      <option name="SCRIPT_NAME" value="C:\Python34\MyProjects\gui-by-ini\guibyini\main.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -261,6 +273,24 @@
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PyDebugRunner" />
       <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/guibyini" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="guibyini" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/guibyini/main.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
@@ -396,25 +426,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="guibyini" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/guibyini/generate_gui.py" />
+      <option name="SCRIPT_NAME" value="C:\Python34\MyProjects\gui-by-ini\guibyini\main.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <list size="5">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.generate_gui" />
       <item index="1" class="java.lang.String" itemvalue="Python.gui-by-ini" />
       <item index="2" class="java.lang.String" itemvalue="Python.SpawnGuiFromIni" />
       <item index="3" class="java.lang.String" itemvalue="Python.tkinterMessageClass" />
       <item index="4" class="java.lang.String" itemvalue="Python.tkinterFrameClass" />
+      <item index="5" class="java.lang.String" itemvalue="Python.main" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.SpawnGuiFromIni" />
-        <item index="1" class="java.lang.String" itemvalue="Python.tkinterFrameClass" />
-        <item index="2" class="java.lang.String" itemvalue="Python.tkinterMessageClass" />
-        <item index="3" class="java.lang.String" itemvalue="Python.gui-by-ini" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.main" />
+        <item index="1" class="java.lang.String" itemvalue="Python.SpawnGuiFromIni" />
+        <item index="2" class="java.lang.String" itemvalue="Python.tkinterFrameClass" />
+        <item index="3" class="java.lang.String" itemvalue="Python.tkinterMessageClass" />
+        <item index="4" class="java.lang.String" itemvalue="Python.gui-by-ini" />
       </list>
     </recent_temporary>
   </component>
@@ -436,14 +468,19 @@
       <created>1415641045789</created>
       <updated>1415641045789</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="General updates">
+      <created>1415733535960</created>
+      <updated>1415733535960</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32834226" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -457,7 +494,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32834226" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.08759124" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -497,22 +533,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/parseFromIni.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="4896">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/GuiConfig.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13634">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1513">
@@ -523,23 +543,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/parseFromIni.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="4896">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/GuiConfig.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13634">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/generate_gui.py">
+    <entry file="file://$PROJECT_DIR$/guibyini/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
           <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
@@ -556,14 +560,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/GuiConfig.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="12772" max-vertical-offset="13702">
-          <caret line="800" column="18" selection-start-line="800" selection-start-column="18" selection-end-line="800" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/guibyini/gui_controls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1496">
@@ -571,7 +567,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/generate_gui.py">
+    <entry file="file://$PROJECT_DIR$/guibyini/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
           <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
@@ -602,18 +598,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/generate_gui.py">
+    <entry file="file://$PROJECT_DIR$/guibyini/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
           <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/GuiConfig.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="13047" max-vertical-offset="13702">
-          <caret line="800" column="18" selection-start-line="800" selection-start-column="18" selection-end-line="800" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -634,40 +622,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/gui_controls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.028333334" vertical-offset="85" max-vertical-offset="1496">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/guibyini/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/generate_gui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22113821" vertical-offset="0" max-vertical-offset="663">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/GuiConfig.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="13634">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guibyini/parseFromIni.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11577">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -727,13 +685,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/guibyini/gui_controls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1496">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.2869954" vertical-offset="4550" max-vertical-offset="7208">
+        <state vertical-scroll-proportion="-118.40351" vertical-offset="0" max-vertical-offset="7208">
           <caret line="397" column="47" selection-start-line="397" selection-start-column="47" selection-end-line="397" selection-end-column="47" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/guibyini/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56198347" vertical-offset="0" max-vertical-offset="726">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

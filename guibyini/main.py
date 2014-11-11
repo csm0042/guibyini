@@ -26,8 +26,6 @@ appWindowCfgFile = os.path.join(path, appWindowCfgFileName)
 appWindowThread = AppWindow(appWindowCfgFile)
 appWindowThread.start()
 
-while appRunning == 1:
-    print(time.strftime("%c"))
-    time.sleep(1)
+
 
 
