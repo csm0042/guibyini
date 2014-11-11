@@ -19,7 +19,7 @@ class AppWindow(threading.Thread):
         self.root.mainloop()
 
 # The following rungs start the thread and call the code to build the application window
-appWindowCfgFileName = 'GuiConfig.ini'
+appWindowCfgFileName = 'gui.ini'
 path = os.path.dirname(os.path.realpath(__file__))
 appWindowCfgFile = os.path.join(path, appWindowCfgFileName)
 
