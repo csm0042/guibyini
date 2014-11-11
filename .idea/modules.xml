@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/guibyini.iml" filepath="$PROJECT_DIR$/.idea/guibyini.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pic_rename/.idea/pic-rename.iml" filepath="$PROJECT_DIR$/../pic_rename/.idea/pic-rename.iml" />
       <module fileurl="file://$PROJECT_DIR$/../pic-rename/.idea/pic-rename.iml" filepath="$PROJECT_DIR$/../pic-rename/.idea/pic-rename.iml" />
     </modules>
   </component>

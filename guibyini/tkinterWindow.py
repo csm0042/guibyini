@@ -9,7 +9,7 @@ class Window(object):
         self.posX = str()
         self.posY = str()
         self.title = str()
-        self.color = str()
+        self.backgroundColor = str()
         self.iniFile = str()
         self.section = str()
 
@@ -19,5 +19,5 @@ class Window(object):
         self.posX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pos x')
         self.posY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pos y')
         self.title = config_parser.ConfigSectionMap(self.iniFile, self.section, 'title')
-        self.color = config_parser.ConfigSectionMap(self.iniFile, self.section, 'color')
+        self.backgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'background color')
         return self

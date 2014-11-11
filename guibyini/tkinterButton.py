@@ -54,7 +54,8 @@ class Button(object):
         self.fontSize = config_parser.ConfigSectionMap(self.iniFile, self.section, 'font size')
         self.foregroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'foreground color')
         self.height = config_parser.ConfigSectionMap(self.iniFile, self.section, 'height')
-        self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight background color')
+        self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section,
+                                                                       'highlight background color')
         self.highlightColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight color')
         self.highlightThickness = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight thickness')
         self.image = config_parser.ConfigSectionMap(self.iniFile, self.section, 'image')

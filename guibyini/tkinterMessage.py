@@ -36,7 +36,8 @@ class Message(object):
         self.fontSize = config_parser.ConfigSectionMap(self.iniFile, self.section, 'font size')
         self.foregroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'foreground color')
         self.highlightBackground = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight background')
-        self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight background color')
+        self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section,
+                                                                       'highlight background color')
         self.highlightThickness = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight thickness')
         self.justify = config_parser.ConfigSectionMap(self.iniFile, self.section, 'justify')
         self.padX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pad x')

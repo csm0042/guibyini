@@ -85,12 +85,16 @@ class SpawnAppWindow:
             self.Button[i].iniFile = self.ButtonPlace[i].iniFile = self.iniFile
             self.Button[i].section = self.ButtonPlace[i].section = "button" + str(i+1)
             self.Button[i] = tkinterButton.Button.read_settings(self.Button[i])
-            self.ButtonPlace[i] = tkinterPlace.Place.read_settings(self.ButtonPlace[i])    
+            self.ButtonPlace[i] = tkinterPlace.Place.read_settings(self.ButtonPlace[i])
+
 
 
     def build(self):
         self.parent.geometry("%sx%s+%s+%s" % (int(self.Window.width), int(self.Window.height),
                                               int(self.Window.posX), int(self.Window.posY)))
+        if self.Window.backgroundColor != "":
+            self.parent.config(background=self.Window.backgroundColor)
+
         for i in range(0, self.frameCount):
             self.tkFrame[i] = tk.Frame()
             if self.Frame[i].backgroundColor != '':
@@ -290,7 +294,8 @@ class SpawnAppWindow:
             if self.Text[i].takeFocus != "":
                 self.tkText[i].config(takefocus=self.Text[i].takeFocus)
             if self.Text[i].text != "":
-                self.Text[i].insert(tk.INSERT, self.Text[i].text)
+                #self.Text[i].insert(tk.INSERT, self.Text[i].text)
+                self.Text[i].config(text=self.Text[i].text)
             if self.Text[i].underline != "":
                 self.tkText[i].config(underline=self.Text[i].underline)
             if self.Text[i].undo != "":
@@ -336,7 +341,8 @@ class SpawnAppWindow:
             if self.Button[i].borderwidth != '':
                 self.tkButton[i].config(borderwidth=int(self.Button[i].borderwidth))
             if self.Button[i].command != '':
-                self.tkButton[i].config(command=lambda instance=int(self.Button[i].command): gui_controls.callback(self.parent, instance))
+                self.tkButton[i].config(command=lambda instance=int(self.Button[i].command): callback(self.parent,
+                                                                                                      instance))
             if self.Button[i].compound != '':
                 self.tkButton[i].config(compound=self.Button[i].compound)
             if self.Button[i].cursor != '':
@@ -410,7 +416,86 @@ class SpawnAppWindow:
             if self.ButtonPlace[i].offsetY != '':
                 self.tkButton[i].place_configure(y=int(self.ButtonPlace[i].offsetY))
         
-        
+
+def callback(parent, num):
+    if num == 1:
+        print('F1 pressed')
+        pass
+    if num == 2:
+        print('F2 pressed')
+        pass
+    if num == 3:
+        print('F3 pressed')
+        pass
+    if num == 4:
+        print('F4 pressed')
+        pass
+    if num == 5:
+        print('F5 pressed')
+        pass
+    if num == 6:
+        print('F6 pressed')
+        pass
+    if num == 7:
+        print('F7 pressed')
+        pass
+    if num == 8:
+        print('F8 pressed')
+        pass
+    if num == 9:
+        print('F9 pressed')
+        pass
+    if num == 10:
+        print('F10 pressed')
+        pass
+    if num == 11:
+        print('F11 pressed')
+        pass
+    if num == 12:
+        print('F12 pressed')
+        pass
+    if num == 13:
+        print('F13 pressed')
+        print('Attempting to close application')
+        try:
+            parent.destroy()
+            print('Application closed')
+        except:
+            print('Application already closed')
+        finally:
+            pass
+    if num == 14:
+        print('F14 pressed')
+        pass
+    if num == 15:
+        print('F15 pressed')
+        pass
+    if num == 16:
+        print('F16 pressed')
+        pass
+    if num == 17:
+        print('F17 pressed')
+        pass
+    if num == 18:
+        print('F18 pressed')
+        pass
+    if num == 19:
+        print('F19 pressed')
+        pass
+    if num == 20:
+        print('F20 pressed')
+        pass
+    if num == 21:
+        print('F21 pressed')
+        print('Attempting to close application')
+        try:
+            parent.destroy()
+            print('Application closed')
+        except:
+            print('Application already closed')
+            pass
+
+
         
 if __name__ == "__main__":
     root=tk.Tk()

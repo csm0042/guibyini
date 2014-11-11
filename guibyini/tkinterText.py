@@ -65,7 +65,8 @@ class Text(object):
         self.foregroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'foreground color')
         self.foregroundStipple = config_parser.ConfigSectionMap(self.iniFile, self.section, 'foreground stipple')
         self.height = config_parser.ConfigSectionMap(self.iniFile, self.section, 'height')
-        self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight background color')
+        self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section,
+                                                                       'highlight background color')
         self.highlightColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight color')
         self.highlightThickness = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight thickness')
         self.insertBackground = config_parser.ConfigSectionMap(self.iniFile, self.section, 'insert background')
@@ -83,8 +84,10 @@ class Text(object):
         self.overstrike = config_parser.ConfigSectionMap(self.iniFile, self.section, 'overstrike')
         self.relief = config_parser.ConfigSectionMap(self.iniFile, self.section, 'relief')
         self.rmargin = config_parser.ConfigSectionMap(self.iniFile, self.section, 'rmargin')
-        self.selectBackgroundColor =config_parser.ConfigSectionMap(self.iniFile, self.section, 'select background color')
-        self.selectForegroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'select foreground color')
+        self.selectBackgroundColor =config_parser.ConfigSectionMap(self.iniFile, self.section,
+                                                                   'select background color')
+        self.selectForegroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section,
+                                                                    'select foreground color')
         self.selectBorderwidth = config_parser.ConfigSectionMap(self.iniFile, self.section, 'select border width')
         self.setGrid = config_parser.ConfigSectionMap(self.iniFile, self.section, 'set grid')
         self.spacing1 = config_parser.ConfigSectionMap(self.iniFile, self.section, 'spacing1')
