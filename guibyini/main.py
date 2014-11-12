@@ -118,16 +118,16 @@ class IOMonitor(threading.Thread):
 #######################################################################################################################
 Config = configparser.ConfigParser()
 Config.read(guiIniFile)
-guiIniDict1 = {}
+dict1 = {}
 options = Config.options('config')
 for option in options:
     try:
-        guiIniDict1[option] = Config.get('config', option)
-        if guiIniDict1[option] == -1:
+        dict1[option] = Config.get('config', option)
+        if dict1[option] == -1:
             pass
     except:
-        guiIniDict1[option] = None
-quitCommand = guiIniDict1['quit command']
+        dict1[option] = None
+quitCommand = dict1['quit command']
 
 
 
