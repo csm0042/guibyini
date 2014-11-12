@@ -27,22 +27,22 @@ class AppWindow(threading.Thread):
         self.iniFile = iniFile
         self.logFile = logFile
         threading.Thread.__init__(self)
-        logging.info('[Main] Application window init complete at t = +%f' % float(time.time()-starttime))
+        logging.info('[Main] Application window init complete at t = +%f' % float(time.time()-startime))
 
     def run(self):
         self.root=tk.Tk()
-        logging.info('[Main] Calling SpawnAppWindow function at t = +%f' % float(time.time()-starttime))
+        logging.info('[Main] Calling SpawnAppWindow function at t = +%f' % float(time.time()-startime))
         SpawnGuiFromIni.AppWindow(self.root, self.iniFile, self.logFile)
-        logging.info('[Main] Setting window title at t = +%f' % float(time.time()-starttime))
+        logging.info('[Main] Setting window title at t = +%f' % float(time.time()-startime))
         self.root.title('My Application Window')
-        logging.info('[Main] Starting tkinter main loop at t = +%f' % float(time.time()-starttime))
+        logging.info('[Main] Starting tkinter main loop at t = +%f' % float(time.time()-startime))
         self.root.mainloop()
 
 
-starttime = time.time()
-logging.info('[Main] Begin generation of application window at t = +%f' % float(starttime-starttime))
+startime = time.time()
+logging.info('[Main] Begin generation of application window at t = +%f' % float(startime-startime))
 appWindowThread = AppWindow(guiIniFile, debugLogFile)
-logging.info('[Main] Starting application window thread at t = +%f' % float(time.time()-starttime))
+logging.info('[Main] Starting application window thread at t = +%f' % float(time.time()-startime))
 appWindowThread.start()
 
 

@@ -18,15 +18,41 @@ class Place(object):
         self.section = str()
 
     def read_settings(self):
-        self.anchor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place anchor')
-        self.borderMode = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place border mode')
-        self.height = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place height')
-        self.width = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place width')
-        self.relHeight = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel height')
-        self.relWidth = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel width')
-        self.relX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel x')
-        self.relY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel y')
-        self.offsetX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place offset x')
-        self.offsetY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place offset y')
+        import configparser
+        Config = configparser.ConfigParser()
+        Config.read(self.iniFile)
+        dict1 = {}
+             
+        options = Config.options(self.section)
+        for option in options:
+            try:
+                dict1[option] = Config.get(self.section, option)
+                if dict1[option] == -1:
+                    pass
+            except:
+                dict1[option] = None
+        
+        self.anchor = dict1['place anchor']
+        self.borderMode = dict1['place border mode']
+        self.height = dict1['place height']
+        self.width = dict1['place width']
+        self.relHeight = dict1['place rel height']
+        self.relWidth = dict1['place rel width']
+        self.relX = dict1['place rel x']
+        self.relY = dict1['place rel y']
+        self.offsetX = dict1['place offset x']
+        self.offsetY = dict1['place offset y']
+        
+        #self.anchor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place anchor')
+        #self.borderMode = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place border mode')
+        #self.height = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place height')
+        #self.width = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place width')
+        #self.relHeight = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel height')
+        #self.relWidth = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel width')
+        #self.relX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel x')
+        #self.relY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel y')
+        #self.offsetX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place offset x')
+        #self.offsetY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place offset y')
+        
         return self
 

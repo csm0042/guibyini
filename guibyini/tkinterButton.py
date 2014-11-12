@@ -42,35 +42,49 @@ class Button(object):
 
 
     def read_settings(self):
-        self.backgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'background color')
-        self.bitmap = config_parser.ConfigSectionMap(self.iniFile, self.section, 'bitmap')
-        self.borderwidth = config_parser.ConfigSectionMap(self.iniFile, self.section, 'border width')
-        self.command = config_parser.ConfigSectionMap(self.iniFile, self.section, 'command')
-        self.compound = config_parser.ConfigSectionMap(self.iniFile, self.section, 'compound')
-        self.cursor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'cursor')
-        self.default = config_parser.ConfigSectionMap(self.iniFile, self.section, 'default')
-        self.disableForeground = config_parser.ConfigSectionMap(self.iniFile, self.section, 'disable foreground')
-        self.font = config_parser.ConfigSectionMap(self.iniFile, self.section, 'font')
-        self.fontSize = config_parser.ConfigSectionMap(self.iniFile, self.section, 'font size')
-        self.foregroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'foreground color')
-        self.height = config_parser.ConfigSectionMap(self.iniFile, self.section, 'height')
-        self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section,
-                                                                       'highlight background color')
-        self.highlightColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight color')
-        self.highlightThickness = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight thickness')
-        self.image = config_parser.ConfigSectionMap(self.iniFile, self.section, 'image')
-        self.justify = config_parser.ConfigSectionMap(self.iniFile, self.section, 'justify')
-        self.overRelief = config_parser.ConfigSectionMap(self.iniFile, self.section, 'over relief')
-        self.padX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pad x')
-        self.padY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pad y')
-        self.relief = config_parser.ConfigSectionMap(self.iniFile, self.section, 'relief')
-        self.repeatDelay = config_parser.ConfigSectionMap(self.iniFile, self.section, 'repeat delay')
-        self.repeatInterval = config_parser.ConfigSectionMap(self.iniFile, self.section, 'repeat interval')
-        self.state = config_parser.ConfigSectionMap(self.iniFile, self.section, 'state')
-        self.takeFocus = config_parser.ConfigSectionMap(self.iniFile, self.section, 'take focus')
-        self.text = config_parser.ConfigSectionMap(self.iniFile, self.section, 'text')
-        self.textVariable = config_parser.ConfigSectionMap(self.iniFile, self.section, 'text variable')
-        self.underline = config_parser.ConfigSectionMap(self.iniFile, self.section, 'underline')
-        self.width = config_parser.ConfigSectionMap(self.iniFile, self.section, 'width')
-        self.wrapLength = config_parser.ConfigSectionMap(self.iniFile, self.section, 'wrap length')
+        import configparser
+        Config = configparser.ConfigParser()
+        Config.read(self.iniFile)
+        dict1 = {}
+
+        options = Config.options(self.section)
+        for option in options:
+            try:
+                dict1[option] = Config.get(self.section, option)
+                if dict1[option] == -1:
+                    pass
+            except:
+                dict1[option] = None
+
+        self.backgroundColor = dict1['background color']
+        self.bitmap = dict1['bitmap']
+        self.borderwidth = dict1['border width']
+        self.command = dict1['command']
+        self.compound = dict1['compound']
+        self.cursor = dict1['cursor']
+        self.default = dict1['default']
+        self.disableForeground = dict1['disable foreground']
+        self.font = dict1['font']
+        self.fontSize = dict1['font size']
+        self.foregroundColor = dict1['foreground color']
+        self.height = dict1['height']
+        self.highlightBackgroundColor = dict1['highlight background color']
+        self.highlightColor = dict1['highlight color']
+        self.highlightThickness = dict1['highlight thickness']
+        self.image = dict1['image']
+        self.justify = dict1['justify']
+        self.overRelief = dict1['over relief']
+        self.padX = dict1['pad x']
+        self.padY = dict1['pad y']
+        self.relief = dict1['relief']
+        self.repeatDelay = dict1['repeat delay']
+        self.repeatInterval = dict1['repeat interval']
+        self.state = dict1['state']
+        self.takeFocus = dict1['take focus']
+        self.text = dict1['text']
+        self.textVariable = dict1['text variable']
+        self.underline = dict1['underline']
+        self.width = dict1['width']
+        self.wrapLength = dict1['wrap length']
+
         return self
