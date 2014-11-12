@@ -4,6 +4,7 @@ import os
 import SpawnGuiFromIni
 import tkinter as tk
 import threading
+import time
 
 
 class AppWindow(threading.Thread):
@@ -13,8 +14,13 @@ class AppWindow(threading.Thread):
 
     def run(self):
         self.root=tk.Tk()
+        starttime = time.time()
+        print(starttime)
         SpawnGuiFromIni.SpawnAppWindow(self.root, self.iniFile)
         self.root.title('My Application Window')
+        finishtime = time.time()
+        print(finishtime)
+        print('Elapsed time: %s' % str(finishtime-starttime))
         self.root.mainloop()
 
 
