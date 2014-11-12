@@ -35,11 +35,4 @@ class Window(object):
         self.title = dict1['title']
         self.backgroundColor = dict1['background color']
 
-        #self.width = config_parser.ConfigSectionMap(self.iniFile, self.section, 'width')
-        #self.height = config_parser.ConfigSectionMap(self.iniFile, self.section, 'height')
-        #self.posX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pos x')
-        #self.posY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pos y')
-        #self.title = config_parser.ConfigSectionMap(self.iniFile, self.section, 'title')
-        #self.backgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'background color')
-
         return self

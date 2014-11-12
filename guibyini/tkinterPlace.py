@@ -42,17 +42,6 @@ class Place(object):
         self.relY = dict1['place rel y']
         self.offsetX = dict1['place offset x']
         self.offsetY = dict1['place offset y']
-        
-        #self.anchor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place anchor')
-        #self.borderMode = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place border mode')
-        #self.height = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place height')
-        #self.width = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place width')
-        #self.relHeight = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel height')
-        #self.relWidth = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel width')
-        #self.relX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel x')
-        #self.relY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place rel y')
-        #self.offsetX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place offset x')
-        #self.offsetY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'place offset y')
-        
+
         return self
 
