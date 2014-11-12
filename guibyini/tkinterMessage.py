@@ -27,24 +27,59 @@ class Message(object):
         self.section = str()
 
     def read_settings(self):
-        self.anchor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'anchor')
-        self.aspect = config_parser.ConfigSectionMap(self.iniFile, self.section, 'aspect')
-        self.backgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'background color')
-        self.borderwidth = config_parser.ConfigSectionMap(self.iniFile, self.section, 'border width')
-        self.cursor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'cursor')
-        self.font = config_parser.ConfigSectionMap(self.iniFile, self.section, 'font')
-        self.fontSize = config_parser.ConfigSectionMap(self.iniFile, self.section, 'font size')
-        self.foregroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'foreground color')
-        self.highlightBackground = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight background')
-        self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section,
-                                                                       'highlight background color')
-        self.highlightThickness = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight thickness')
-        self.justify = config_parser.ConfigSectionMap(self.iniFile, self.section, 'justify')
-        self.padX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pad x')
-        self.padY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pad y')
-        self.relief = config_parser.ConfigSectionMap(self.iniFile, self.section, 'relief')
-        self.takeFocus = config_parser.ConfigSectionMap(self.iniFile, self.section, 'take focus')
-        self.text = config_parser.ConfigSectionMap(self.iniFile, self.section, 'text')
-        self.textVariable = config_parser.ConfigSectionMap(self.iniFile, self.section, 'text variable')
-        self.width = config_parser.ConfigSectionMap(self.iniFile, self.section, 'width')
+        import configparser
+        Config = configparser.ConfigParser()
+        Config.read(self.iniFile)
+        dict1 = {}
+             
+        options = Config.options(self.section)
+        for option in options:
+            try:
+                dict1[option] = Config.get(self.section, option)
+                if dict1[option] == -1:
+                    pass
+            except:
+                dict1[option] = None
+        
+        self.anchor = dict1['anchor']
+        self.aspect = dict1['aspect']
+        self.backgroundColor = dict1['background color']
+        self.borderwidth = dict1['border width']
+        self.cursor = dict1['cursor']
+        self.font = dict1['font']
+        self.fontSize = dict1['font size']
+        self.foregroundColor = dict1['foreground color']
+        self.highlightBackground = dict1['highlight background']
+        self.highlightBackgroundColor = dict1['highlight background color']
+        self.highlightThickness = dict1['highlight thickness']
+        self.justify = dict1['justify']
+        self.padX = dict1['pad x']
+        self.padY = dict1['pad y']
+        self.relief = dict1['relief']
+        self.takeFocus = dict1['take focus']
+        self.text = dict1['text']
+        self.textVariable = dict1['text variable']
+        self.width = dict1['width']
+
+        #self.anchor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'anchor')
+        #self.aspect = config_parser.ConfigSectionMap(self.iniFile, self.section, 'aspect')
+        #self.backgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'background color')
+        #self.borderwidth = config_parser.ConfigSectionMap(self.iniFile, self.section, 'border width')
+        #self.cursor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'cursor')
+        #self.font = config_parser.ConfigSectionMap(self.iniFile, self.section, 'font')
+        #self.fontSize = config_parser.ConfigSectionMap(self.iniFile, self.section, 'font size')
+        #self.foregroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section, 'foreground color')
+        #self.highlightBackground = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight background')
+        #self.highlightBackgroundColor = config_parser.ConfigSectionMap(self.iniFile, self.section,
+        #                                                               'highlight background color')
+        #self.highlightThickness = config_parser.ConfigSectionMap(self.iniFile, self.section, 'highlight thickness')
+        #self.justify = config_parser.ConfigSectionMap(self.iniFile, self.section, 'justify')
+        #self.padX = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pad x')
+        #self.padY = config_parser.ConfigSectionMap(self.iniFile, self.section, 'pad y')
+        #self.relief = config_parser.ConfigSectionMap(self.iniFile, self.section, 'relief')
+        #self.takeFocus = config_parser.ConfigSectionMap(self.iniFile, self.section, 'take focus')
+        #self.text = config_parser.ConfigSectionMap(self.iniFile, self.section, 'text')
+        #self.textVariable = config_parser.ConfigSectionMap(self.iniFile, self.section, 'text variable')
+        #self.width = config_parser.ConfigSectionMap(self.iniFile, self.section, 'width')
+
         return self
