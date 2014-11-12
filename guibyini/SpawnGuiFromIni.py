@@ -10,10 +10,12 @@ import tkinterButton
 
 
 class AppWindow:
-    def __init__(self, parent, iniFile, logFile):
+    def __init__(self, parent, iniFile, logFile, ioTable):
         self.parent = parent
         self.iniFile = iniFile
         self.logFile = logFile
+        self.ioTable = ioTable
+        self.section = str()
         self.startime = time.time()
 
         logging.basicConfig(level=logging.DEBUG,
@@ -23,11 +25,11 @@ class AppWindow:
         logging.info('[SpawnGuiFromIni.init] Program Logger for SpawnAppWindow Started at t = +%f' %
                      float(self.startime-self.startime))
 
-        self.section = str()
+
 
         self.Window = tkinterWindow.Window()
 
-        # Create tag list for frame settings
+
         logging.info('[SpawnGuiFromIni.init] Searching INI file for "frame" widgets at t = +%f' %
                      float(time.time()-self.startime))
         self.frameCount = widget_count.CountWidgetByType(self.iniFile, "frame")
@@ -35,12 +37,10 @@ class AppWindow:
                      (self.frameCount, float(time.time()-self.startime)))
         self.frameDataRead = 0
         self.framesCreated = 0
-        #self.Frame = [tkinterFrame.Frame() for i in range(self.frameCount)]
         self.Frame = tkinterFrame.Frame()
-        #self.FramePlace = [tkinterPlace.Place() for i in range(self.frameCount)]
         self.FramePlace = tkinterPlace.Place()
-        #self.tkFrame = [tk.Frame() for i in range(self.frameCount)]
         self.tkFrame = tk.Frame()
+
 
         # Create tag lists for message settings
         logging.info('[SpawnGuiFromIni.init] Searching INI file for "message" widgets at t = +%f' %
@@ -50,24 +50,23 @@ class AppWindow:
                      (self.messageCount, float(time.time()-self.startime)))
         self.messageDataRead = 0
         self.messagesCreated = 0
-        #self.Message = [tkinterMessage.Message() for i in range(self.messageCount)]
         self.Message = tkinterMessage.Message()
-        #self.MessagePlace = [tkinterPlace.Place() for i in range(self.messageCount)]
         self.MessagePlace = tkinterPlace.Place()
-        #self.tkMessage = [tk.Message() for i in range(self.messageCount)]
         self.tkMessage = tk.Message()
-        
+
+
         # Create tag list for text settings
         logging.info('[SpawnGuiFromIni.init] Searching INI file for "text" widgets at t = +%f' %
                      float(time.time()-self.startime))
-        self.textCount = widget_count.CountWidgetByType(self.iniFile, "Text")
+        self.textCount = widget_count.CountWidgetByType(self.iniFile, "text")
         logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "text" widgets at t = +%f' %
                      (self.textCount, float(time.time()-self.startime)))
         self.textDataRead = 0
         self.textsCreated = 0
-        self.Text = [tkinterText.Text() for i in range(self.textCount)]
-        self.TextPlace = [tkinterPlace.Place() for i in range(self.textCount)]
-        self.tkText = [tk.Text() for i in range(self.textCount)]
+        self.Text = tkinterText.Text()
+        self.TextPlace = tkinterPlace.Place()
+        self.tkText = tk.Text()
+
 
         # Create tag lists for button settings
         logging.info('[SpawnGuiFromIni.init] Searching INI file for "button" widgets at t = +%f' %
@@ -77,12 +76,11 @@ class AppWindow:
                      (self.buttonCount, float(time.time()-self.startime)))
         self.buttonDataRead = 0
         self.buttonsCreated = 0
-        #self.Button = [tkinterButton.Button() for i in range(self.buttonCount)]
         self.Button = tkinterButton.Button()
-        #self.ButtonPlace = [tkinterPlace.Place() for i in range(self.buttonCount)]
+        self.ButtonInput = [bool() for i in range(self.buttonCount)]
         self.ButtonPlace = tkinterPlace.Place()
-        #self.tkButton = [tk.Button() for i in range(self.buttonCount)]
         self.tkButton = tk.Button()
+
 
         # Call function to populate setting tags
         logging.info('[SpawnGuiFromIni.init] Call "initialize" function at t = +%f' % float(time.time()-self.startime))
@@ -95,6 +93,7 @@ class AppWindow:
     def SpawnAppWindow(self):
         self.Window.section = "main window"
         self.Window.iniFile = self.iniFile
+
         self.Window = tkinterWindow.Window.read_settings(self.Window)
         logging.info('[SpawnGuiFromIni.SpawnAppWindow] Adjusting window geometry at t = +%f' % float(time.time()-self.startime))
         self.parent.geometry("%sx%s+%s+%s" % (int(self.Window.width), int(self.Window.height),
@@ -277,18 +276,18 @@ class AppWindow:
                 self.tkText.config(insertOnTime=int(self.Text.insertOnTime))
             if self.Text.insertWidth != "":
                 self.tkText.config(insertWidth=int(self.Text.insertWidth))
-            if self.Text.justify != "":
-                self.tkText.config(justify=self.Text.justify)
+            #if self.Text.justify != "":
+            #    self.tkText.config(justify=self.Text.justify)
             if self.Text.lmargin1 != "":
                 self.tkText.config(lmargin1=int(self.Text.lmargin1))
-            if self.Text.tlmargin2 != "":
+            if self.Text.lmargin2 != "":
                 self.tkText.config(lmargin2=int(self.Text.lmargin2))
             if self.Text.maxUndo != "":
                 self.tkText.config(maxundo=int(self.Text.maxUndo))
             if self.Text.padX != "":
                 self.tkText.config(padx=int(self.Text.padX))
             if self.Text.padY != "":
-                self.tkText.config(PadY=int(self.Text.padY))
+                self.tkText.config(pady=int(self.Text.padY))
             if self.Text.offset != "":
                 self.tkText.config(offset=int(self.Text.offset))
             if self.Text.overstrike != "":
@@ -299,7 +298,7 @@ class AppWindow:
                 self.tkText.config(overstrike=int(self.Text.rmargin))
             if self.Text.selectBackgroundColor != "":
                 self.tkText.config(selectbackground=self.Text.selectBackgroundColor)
-            if self.Text.tselectForegroundColor != "":
+            if self.Text.selectForegroundColor != "":
                 self.tkText.config(selectforeground=self.Text.selectForegroundColor)
             if self.Text.selectBorderwidth != "":
                 self.tkText.config(selectborderwidth=int(self.Text.selectBorderwidth))
@@ -318,8 +317,7 @@ class AppWindow:
             if self.Text.takeFocus != "":
                 self.tkText.config(takefocus=self.Text.takeFocus)
             if self.Text.text != "":
-                #self.Text.insert(tk.INSERT, self.Text.text)
-                self.Text.config(text=self.Text.text)
+                self.tkText.insert(tk.END, self.Text.text)
             if self.Text.underline != "":
                 self.tkText.config(underline=self.Text.underline)
             if self.Text.undo != "":
@@ -356,7 +354,8 @@ class AppWindow:
             if self.TextPlace.offsetY != '':
                 self.tkText.place_configure(y=int(self.TextPlace.offsetY))
 
-        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Starting "button" widget loop at t = +%f' % float(time.time()-self.startime))
+        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Starting "button" widget loop at t = +%f' %
+                     float(time.time()-self.startime))
         for i in range(0, self.buttonCount):
             self.Button.iniFile = self.ButtonPlace.iniFile = self.iniFile
             self.Button.section = self.ButtonPlace.section = "button" + str(i+1)
@@ -370,7 +369,7 @@ class AppWindow:
             if self.Button.borderwidth != '':
                 self.tkButton.config(borderwidth=int(self.Button.borderwidth))
             if self.Button.command != '':
-                self.tkButton.config(command=lambda instance=int(self.Button.command): callback(self.parent, instance))
+                self.tkButton.config(command=lambda instance=int(self.Button.command): AppWindow.callback(self, instance))
             if self.Button.compound != '':
                 self.tkButton.config(compound=self.Button.compound)
             if self.Button.cursor != '':
@@ -445,85 +444,15 @@ class AppWindow:
             if self.ButtonPlace.offsetY != '':
                 self.tkButton.place_configure(y=int(self.ButtonPlace.offsetY))
 
+        return self
 
 
-def callback(parent, num):
-    if num == 1:
-        print('F1 pressed')
-        pass
-    if num == 2:
-        print('F2 pressed')
-        pass
-    if num == 3:
-        print('F3 pressed')
-        pass
-    if num == 4:
-        print('F4 pressed')
-        pass
-    if num == 5:
-        print('F5 pressed')
-        pass
-    if num == 6:
-        print('F6 pressed')
-        pass
-    if num == 7:
-        print('F7 pressed')
-        pass
-    if num == 8:
-        print('F8 pressed')
-        pass
-    if num == 9:
-        print('F9 pressed')
-        pass
-    if num == 10:
-        print('F10 pressed')
-        pass
-    if num == 11:
-        print('F11 pressed')
-        pass
-    if num == 12:
-        print('F12 pressed')
-        pass
-    if num == 13:
-        print('F13 pressed')
-        print('Attempting to close application')
-        try:
-            parent.destroy()
-            print('Application closed')
-        except:
-            print('Application already closed')
-        finally:
-            pass
-    if num == 14:
-        print('F14 pressed')
-        pass
-    if num == 15:
-        print('F15 pressed')
-        pass
-    if num == 16:
-        print('F16 pressed')
-        pass
-    if num == 17:
-        print('F17 pressed')
-        pass
-    if num == 18:
-        print('F18 pressed')
-        pass
-    if num == 19:
-        print('F19 pressed')
-        pass
-    if num == 20:
-        print('F20 pressed')
-        pass
-    if num == 21:
-        print('F21 pressed')
-        print('Attempting to close application')
-        try:
-            parent.destroy()
-            print('Application closed')
-        except:
-            print('Application already closed')
-            pass
+    def callback(self, instance):
+        import time
+        self.ioTable.input[instance] = True
+        time.sleep(0.25)
+        self.ioTable.input[instance] = False
+        return self
 
 
         

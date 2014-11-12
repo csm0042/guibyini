@@ -1,7 +1,5 @@
 __author__ = 'chris.maue'
 
-import config_parser
-
 class Text(object):
     def __init__(self):
         self.autoSeparators = str()
