@@ -34,6 +34,8 @@ logging.basicConfig(level=logging.DEBUG,
                     filename=debugLogFile,
                     filemode='w')
 logging.info('[Main] Program Logger Started')
+logging.info('[Main] Logging to file: %s' % debugLogFile)
+logging.info('[Main] Using GUI configuration file: %s' % guiIniFile)
 
 
 
@@ -116,16 +118,16 @@ class IOMonitor(threading.Thread):
 #######################################################################################################################
 Config = configparser.ConfigParser()
 Config.read(guiIniFile)
-iniDict1 = {}
+guiIniDict1 = {}
 options = Config.options('config')
 for option in options:
     try:
-        iniDict1[option] = Config.get('config', option)
-        if iniDict1[option] == -1:
+        guiIniDict1[option] = Config.get('config', option)
+        if guiIniDict1[option] == -1:
             pass
     except:
-        iniDict1[option] = None
-quitCommand = iniDict1['quit command']
+        guiIniDict1[option] = None
+quitCommand = guiIniDict1['quit command']
 
 
 
@@ -141,29 +143,26 @@ appWindowIoTableOS = ApplicationIO()
 
 
 #######################################################################################################################
-# Start application window and IO monitoring threads
+# Start application window thread
 #######################################################################################################################
 startime = time.time()
 
+logging.info('[Main] Spawning Application window thread (thread-1)')
 Thread1 = AppWindow(guiIniFile, debugLogFile, appWindowIoTable)
-Thread2 = IOMonitor(appWindowIoTable, appWindowIoTableCache, appWindowIoTableOS, quitCommand, Thread1)
-
 Thread1.daemon = False
-Thread2.daemon = True
-
+logging.info('[Main] Thread 1 (application window GUI) daemon flag set to "False"')
 Thread1.start()
-logging.info('Thread 1 started')
+logging.info('[Main] Thread 1 started')
+
+
+
+
+#######################################################################################################################
+# Start IO monitoring thread
+#######################################################################################################################
+logging.info('[Main] Spawning IO Monitor thread (thread-2)')
+Thread2 = IOMonitor(appWindowIoTable, appWindowIoTableCache, appWindowIoTableOS, quitCommand, Thread1)
+Thread2.daemon = True
+logging.info('[Main] Thread 2 (IO Monitor) daemon flag set to "True"')
 Thread2.start()
-logging.info('Thread 2 started')
-
-
-
-
-
-
-
-
-
-
-
-
+logging.info('[Main] Thread 2 started')
