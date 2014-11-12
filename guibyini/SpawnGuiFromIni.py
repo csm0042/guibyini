@@ -1,3 +1,4 @@
+import logging, time
 import tkinter as tk
 import widget_count
 import tkinterPlace
@@ -8,17 +9,30 @@ import tkinterText
 import tkinterButton
 
 
-
-class SpawnAppWindow:
-    def __init__(self, parent, iniFile):
+class AppWindow:
+    def __init__(self, parent, iniFile, logFile):
         self.parent = parent
         self.iniFile = iniFile
+        self.logFile = logFile
+        self.startime = time.time()
+
+        logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    filename=self.logFile,
+                    filemode='w')
+        logging.info('[SpawnGuiFromIni.init] Program Logger for SpawnAppWindow Started at t = +%f' %
+                     float(self.startime-self.startime))
+
         self.section = str()
 
         self.Window = tkinterWindow.Window()
 
         # Create tag list for frame settings
+        logging.info('[SpawnGuiFromIni.init] Searching INI file for "frame" widgets at t = +%f' %
+                     float(time.time()-self.startime))
         self.frameCount = widget_count.CountWidgetByType(self.iniFile, "frame")
+        logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "frame" widgets at t = +%f' %
+                     (self.frameCount, float(time.time()-self.startime)))
         self.frameDataRead = 0
         self.framesCreated = 0
         #self.Frame = [tkinterFrame.Frame() for i in range(self.frameCount)]
@@ -29,7 +43,11 @@ class SpawnAppWindow:
         self.tkFrame = tk.Frame()
 
         # Create tag lists for message settings
+        logging.info('[SpawnGuiFromIni.init] Searching INI file for "message" widgets at t = +%f' %
+                     float(time.time()-self.startime))
         self.messageCount = widget_count.CountWidgetByType(self.iniFile, "message")
+        logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "message" widgets at t = +%f' %
+                     (self.messageCount, float(time.time()-self.startime)))
         self.messageDataRead = 0
         self.messagesCreated = 0
         #self.Message = [tkinterMessage.Message() for i in range(self.messageCount)]
@@ -40,7 +58,11 @@ class SpawnAppWindow:
         self.tkMessage = tk.Message()
         
         # Create tag list for text settings
+        logging.info('[SpawnGuiFromIni.init] Searching INI file for "text" widgets at t = +%f' %
+                     float(time.time()-self.startime))
         self.textCount = widget_count.CountWidgetByType(self.iniFile, "Text")
+        logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "text" widgets at t = +%f' %
+                     (self.textCount, float(time.time()-self.startime)))
         self.textDataRead = 0
         self.textsCreated = 0
         self.Text = [tkinterText.Text() for i in range(self.textCount)]
@@ -48,7 +70,11 @@ class SpawnAppWindow:
         self.tkText = [tk.Text() for i in range(self.textCount)]
 
         # Create tag lists for button settings
+        logging.info('[SpawnGuiFromIni.init] Searching INI file for "button" widgets at t = +%f' %
+                     float(time.time()-self.startime))
         self.buttonCount = widget_count.CountWidgetByType(self.iniFile, "button")
+        logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "button" widgets at t = +%f' %
+                     (self.buttonCount, float(time.time()-self.startime)))
         self.buttonDataRead = 0
         self.buttonsCreated = 0
         #self.Button = [tkinterButton.Button() for i in range(self.buttonCount)]
@@ -59,23 +85,26 @@ class SpawnAppWindow:
         self.tkButton = tk.Button()
 
         # Call function to populate setting tags
-        self.initialize()
-
-        # Call function to generate window using obtained settings
-        # self.build()
-
+        logging.info('[SpawnGuiFromIni.init] Call "initialize" function at t = +%f' % float(time.time()-self.startime))
+        self.SpawnAppWindow()
+        logging.info('[SpawnGuiFromIni.init] Initialization complete at t = +%f' % float(time.time()-self.startime))
 
 
 
-    def initialize(self):
+
+    def SpawnAppWindow(self):
         self.Window.section = "main window"
         self.Window.iniFile = self.iniFile
         self.Window = tkinterWindow.Window.read_settings(self.Window)
+        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Adjusting window geometry at t = +%f' % float(time.time()-self.startime))
         self.parent.geometry("%sx%s+%s+%s" % (int(self.Window.width), int(self.Window.height),
                                               int(self.Window.posX), int(self.Window.posY)))
+        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Adjusting window background color at t = +%f' %
+                     float(time.time()-self.startime))
         if self.Window.backgroundColor != "":
             self.parent.config(background=self.Window.backgroundColor)
 
+        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Starting "frame" widget loop at t = +%f' % float(time.time()-self.startime))
         for i in range(0, self.frameCount):
             self.Frame.iniFile = self.FramePlace.iniFile = self.iniFile
             self.Frame.section = self.FramePlace.section = str("frame" + str(i+1))
@@ -136,7 +165,7 @@ class SpawnAppWindow:
             if self.FramePlace.offsetY != '':
                 self.tkFrame.place_configure(y=int(self.FramePlace.offsetY))
 
-
+        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Starting "message" widget loop at t = +%f' % float(time.time()-self.startime))
         for i in range(0, self.messageCount):
             self.Message.iniFile = self.MessagePlace.iniFile = self.iniFile
             self.Message.section = self.MessagePlace.section = "message" + str(i+1)
@@ -203,7 +232,7 @@ class SpawnAppWindow:
             if self.MessagePlace.offsetY != '':
                 self.tkMessage.place_configure(y=int(self.MessagePlace.offsetY))
 
-            
+        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Starting "text" widget loop at t = +%f' % float(time.time()-self.startime))
         for i in range(0, self.textCount):
             self.Text.iniFile = self.TextPlace.iniFile = self.iniFile
             self.Text.section = self.TextPlace.section = str("text" + str(i+1))
@@ -327,6 +356,7 @@ class SpawnAppWindow:
             if self.TextPlace.offsetY != '':
                 self.tkText.place_configure(y=int(self.TextPlace.offsetY))
 
+        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Starting "button" widget loop at t = +%f' % float(time.time()-self.startime))
         for i in range(0, self.buttonCount):
             self.Button.iniFile = self.ButtonPlace.iniFile = self.iniFile
             self.Button.section = self.ButtonPlace.section = "button" + str(i+1)
@@ -415,7 +445,7 @@ class SpawnAppWindow:
             if self.ButtonPlace.offsetY != '':
                 self.tkButton.place_configure(y=int(self.ButtonPlace.offsetY))
 
-        
+
 
 def callback(parent, num):
     if num == 1:
@@ -499,6 +529,6 @@ def callback(parent, num):
         
 if __name__ == "__main__":
     root=tk.Tk()
-    app = SpawnAppWindow(root, 'gui.ini')
+    app = AppWindow(root, 'gui.ini', 'debug.log')
     root.title('My App Window')
     root.mainloop()
