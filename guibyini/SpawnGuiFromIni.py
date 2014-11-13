@@ -464,10 +464,16 @@ class AppWindow:
 
         return self
 
-    def tkHandshakeReadText(self, field):
-        self.field = field
+    def readTextField(self, field):
+        self.field = field - 1
         self.tkTextHandshake[self.field] = self.tkText[self.field].get("1.0", tk.END)
         return self.tkTextHandshake[self.field]
+
+    def writeTextField(self, field, text):
+        self.field = field - 1
+        self.text = text
+        self.tkText[self.field].insert(tk.END, self.text)
+
 
 
 
