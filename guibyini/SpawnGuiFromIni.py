@@ -14,100 +14,66 @@ import tkinterButton
 #######################################################################################################################
 # Define class
 #######################################################################################################################
-class SpawnAppwindow:
+class AppWindow(object):
     def __init__(self, inifile, logfile, iotable):
-        self.root = tk.Tk()
         self.inifile = inifile
         self.logfile = logfile
         self.iotable = iotable
+        self.root = tk.Tk()
+
+        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)-8s %(message)s',
+                            filename=self.logfile, filemode='w')
+        logging.info('[AppWindow.init] Appwindow object created')
+
+        self.frameCount = widget_count.CountWidgetByType(self.inifile, "frame")
+        self.messageCount = widget_count.CountWidgetByType(self.inifile, "message")
+        self.textCount = widget_count.CountWidgetByType(self.inifile, "text")
+        self.buttonCount = widget_count.CountWidgetByType(self.inifile, "button")
+        logging.info('[AppWindow.init] Found configuration data for %d "frame" widgets' %self.frameCount)
+        logging.info('[AppWindow.init] Found configuration data for %d "message" widgets' %self.messageCount)
+        logging.info('[AppWindow.init] Found configuration data for %d "text" widgets' %self.textCount)
+        logging.info('[AppWindow.init] Found configuration data for %d "button" widgets' %self.buttonCount)
+
         self.section = str()
-        self.startime = time.time()
-
-        logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)-8s %(message)s',
-                    filename=self.logfile,
-                    filemode='w')
-        logging.info('[SpawnGuiFromIni.init] Program Logger for SpawnAppWindow Started at t = +%f' %
-                     float(self.startime-self.startime))
-
-
-
         self.Window = tkinterWindow.Window()
 
-
-        logging.info('[SpawnGuiFromIni.init] Searching INI file for "frame" widgets at t = +%f' %
-                     float(time.time()-self.startime))
-        self.frameCount = widget_count.CountWidgetByType(self.inifile, "frame")
-        logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "frame" widgets at t = +%f' %
-                     (self.frameCount, float(time.time()-self.startime)))
-        self.frameDataRead = 0
-        self.framesCreated = 0
         self.Frame = tkinterFrame.Frame()
         self.FramePlace = tkinterPlace.Place()
         self.tkFrame = [tk.Frame() for i in range(self.frameCount)]
 
-
-        # Create tag lists for message settings
-        logging.info('[SpawnGuiFromIni.init] Searching INI file for "message" widgets at t = +%f' %
-                     float(time.time()-self.startime))
-        self.messageCount = widget_count.CountWidgetByType(self.inifile, "message")
-        logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "message" widgets at t = +%f' %
-                     (self.messageCount, float(time.time()-self.startime)))
-        self.messageDataRead = 0
-        self.messagesCreated = 0
         self.Message = tkinterMessage.Message()
         self.MessagePlace = tkinterPlace.Place()
         self.tkMessage = [tk.Message() for i in range(self.messageCount)]
 
-        # Create tag list for text settings
-        logging.info('[SpawnGuiFromIni.init] Searching INI file for "text" widgets at t = +%f' %
-                     float(time.time()-self.startime))
-        self.textCount = widget_count.CountWidgetByType(self.inifile, "text")
-        logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "text" widgets at t = +%f' %
-                     (self.textCount, float(time.time()-self.startime)))
-        self.textDataRead = 0
-        self.textsCreated = 0
         self.Text = tkinterText.Text()
         self.TextPlace = tkinterPlace.Place()
         self.tkText = [tk.Text() for i in range(self.textCount)]
         self.tkTextHandshake = [str() for i in range(self.textCount)]
 
-        # Create tag lists for button settings
-        logging.info('[SpawnGuiFromIni.init] Searching INI file for "button" widgets at t = +%f' %
-                     float(time.time()-self.startime))
-        self.buttonCount = widget_count.CountWidgetByType(self.inifile, "button")
-        logging.info('[SpawnGuiFromIni.init] Found configuration data for %d "button" widgets at t = +%f' %
-                     (self.buttonCount, float(time.time()-self.startime)))
-        self.buttonDataRead = 0
-        self.buttonsCreated = 0
         self.Button = tkinterButton.Button()
-        self.ButtonInput = [bool() for i in range(self.buttonCount)]
         self.ButtonPlace = tkinterPlace.Place()
         self.tkButton = [tk.Button() for i in range(self.buttonCount)]
-
-        # Call function to populate setting tags
-        logging.info('[SpawnGuiFromIni.init] Call "initialize" function at t = +%f' % float(time.time()-self.startime))
-        self.SpawnAppWindow()
-        logging.info('[SpawnGuiFromIni.init] Initialization complete at t = +%f' % float(time.time()-self.startime))
-
+        self.ButtonInput = [bool() for i in range(self.buttonCount)]
 
 
 
     def SpawnAppWindow(self):
-        self.Window.section = "main window"
-        self.Window.iniFile = self.inifile
 
-       
         ################################################################################################################
         # CREATE TKINTER MAIN WINDOW
         ################################################################################################################
+        self.Window.section = "main window"
+        self.Window.iniFile = self.inifile
         self.Window = tkinterWindow.Window.read_settings(self.Window)
-        logging.info('[SpawnGuiFromIni.SpawnAppwindow] Adjusting window geometry')
-        self.root.geometry("%sx%s+%s+%s" % (int(self.Window.width), int(self.Window.height),
-                                              int(self.Window.posX), int(self.Window.posY)))
-        logging.info('[SpawnGuiFromIni.SpawnAppwindow] Adjusting window background color')
+        logging.info('[SpawnAppwindow] Adjusting window geometry')
+        self.root.geometry("%sx%s+%s+%s" % (int(self.Window.width), int(self.Window.height), int(self.Window.posX),
+                                            int(self.Window.posY)))
+        logging.info('[SpawnAppWindow] Adjusting window background color')
         if self.Window.backgroundColor != "":
-            self.parent.config(background=self.Window.backgroundColor)
+            self.root.config(background=self.Window.backgroundColor)
+        logging.info('[SpawnAppWindow] Setting window title')
+        if self.Window.title != '':
+            self.root.title(self.Window.title)
 
 
         ################################################################################################################
@@ -117,356 +83,386 @@ class SpawnAppwindow:
         for i in range(0, self.frameCount):
             self.Frame.iniFile = self.FramePlace.iniFile = self.inifile
             self.Frame.section = self.FramePlace.section = str("frame" + str(i+1))
-            
             self.Frame = tkinterFrame.Frame.read_settings(self.Frame)
-            self.tkFrame[i] = tk.Frame()
-            if self.Frame.backgroundColor != '':
-                self.tkFrame[i].config(background=self.Frame.backgroundColor)
-            if self.Frame.borderwidth != '':
-                self.tkFrame[i].config(borderwidth=int(self.Frame.borderwidth))
-            if self.Frame.colormap != '':
-                self.tkFrame[i].config(colormap=self.Frame.colormap)
-            if self.Frame.container != '':
-                self.tkFrame[i].config(container=self.Frame.container)
-            if self.Frame.cursor != '':
-                self.tkFrame[i].config(cursor=self.Frame.cursor)
-            if self.Frame.height != '':
-                self.tkFrame[i].config(height=int(self.Frame.height))
-            if self.Frame.highlightBackgroundColor != '':
-                self.tkFrame[i].config(highlightbackground=self.Frame.highlightBackgroundColor)
-            if self.Frame.highlightColor != '':
-                self.tkFrame[i].config(highlightcolor=self.Frame.highlightColor)
-            if self.Frame.highlightThickness != '':
-                self.tkFrame[i].config(highlightthickness=int(self.Frame.highlightThickness))
-            if self.Frame.padX != '':
-                self.tkFrame[i].config(padx=int(self.Frame.padX))
-            if self.Frame.padY != '':
-                self.tkFrame[i].config(pady=int(self.Frame.padY))
-            if self.Frame.relief != '':
-                self.tkFrame[i].config(relief=self.Frame.relief)
-            if self.Frame.takeFocus != '':
-                self.tkFrame[i].config(takefocus=self.Frame.takeFocus)
-            if self.Frame.visual != '':
-                self.tkFrame[i].config(visual=self.Frame.visual)
-            if self.Frame.width != '':
-                self.tkFrame[i].config(width=int(self.Frame.width))
-                
             self.FramePlace = tkinterPlace.Place.read_settings(self.FramePlace)
-            self.tkFrame[i].place()
-            if self.FramePlace.anchor != '':
-                self.tkFrame[i].place_configure(anchor=self.FramePlace.anchor)
-            if self.FramePlace.borderMode != '':
-                self.tkFrame[i].place_configure(bordermode=self.FramePlace.borderMode)
-            if self.FramePlace.height != '':
-                self.tkFrame[i].place_configure(height=int(self.FramePlace.height))
-            if self.FramePlace.width != '':
-                self.tkFrame[i].place_configure(width=int(self.FramePlace.width))
-            if self.FramePlace.relHeight != '':
-                self.tkFrame[i].place_configure(relheight=float(self.FramePlace.relHeight))
-            if self.FramePlace.relWidth != '':
-                self.tkFrame[i].place_configure(relwidth=float(self.FramePlace.relWidth))
-            if self.FramePlace.relX != '':
-                self.tkFrame[i].place_configure(relx=float(self.FramePlace.relX))
-            if self.FramePlace.relY != '':
-                self.tkFrame[i].place_configure(rely=float(self.FramePlace.relY))
-            if self.FramePlace.offsetX != '':
-                self.tkFrame[i].place_configure(x=int(self.FramePlace.offsetX))
-            if self.FramePlace.offsetY != '':
-                self.tkFrame[i].place_configure(y=int(self.FramePlace.offsetY))
-        
-        
+            logging.info('[SpawnAppWindow] Creating frame widget #%d' % (i+1))
+            self.tkFrame[i] = self.SpawnFrame(self.tkFrame[i], self.Frame, self.FramePlace)
+
+
         ################################################################################################################
         # CALL LOOP TO CREATE MESSAGE WIDGETS
         ################################################################################################################
-        logging.info('[SpawnGuiFromIni.SpawnAppwindow] Starting "message" widget loop')
+        logging.info('[SpawnAppWindow] Starting "message" widget loop')
         for i in range(0, self.messageCount):
             self.Message.iniFile = self.MessagePlace.iniFile = self.inifile
             self.Message.section = self.MessagePlace.section = "message" + str(i+1)
-            
             self.Message = tkinterMessage.Message.read_settings(self.Message)
-            self.tkMessage[i] = tk.Message()    
-            if self.Message.anchor != "":
-                self.tkMessage[i].config(anchor=self.Message.anchor)
-            if self.Message.aspect != "":
-                self.tkMessage[i].config(aspect=self.Message.aspect)
-            if self.Message.backgroundColor != "":
-                self.tkMessage[i].config(background=self.Message.backgroundColor)
-            if self.Message.borderwidth != "":
-                self.tkMessage[i].config(borderwidth=self.Message.borderwidth)
-            if self.Message.cursor != "":
-                self.tkMessage[i].config(cursor=self.Message.cursor)
-            if self.Message.font != "" and self.Message.fontSize != "":
-                self.tkMessage[i].config(font=(self.Message.font, int(self.Message.fontSize)))
-            if self.Message.foregroundColor != "":
-                self.tkMessage[i].config(foreground=self.Message.foregroundColor)
-            if self.Message.highlightBackground != "":
-                self.tkMessage[i].config(highlightbackground=self.Message.highlightBackground)
-            if self.Message.highlightBackgroundColor != "":
-                self.tkMessage[i].config(highlightcolor=self.Message.highlightBackgroundColor)
-            if self.Message.highlightThickness != "":
-                self.tkMessage[i].config(highlightthickness=int(self.Message.highlightThickness))
-            if self.Message.justify != "":
-                self.tkMessage[i].config(justify=self.Message.justify)
-            if self.Message.padX != "":
-                self.tkMessage[i].config(padx=int(self.Message.padX))
-            if self.Message.padY != "":
-                self.tkMessage[i].config(pady=int(self.Message.padY))
-            if self.Message.relief != "":
-                self.tkMessage[i].config(relief=self.Message.relief)
-            if self.Message.takeFocus != "":
-                self.tkMessage[i].config(takefocus=self.Message.takeFocus)
-            if self.Message.text != "":
-                self.tkMessage[i].config(text=self.Message.text)
-            if self.Message.textVariable != "":
-                self.tkMessage[i].config(textvariable=self.Message.textVariable)
-            if self.Message.width != "":
-                self.tkMessage[i].config(width=int(self.Message.width))
-            
             self.MessagePlace = tkinterPlace.Place.read_settings(self.MessagePlace)
-            self.tkMessage[i].place()
-            if self.MessagePlace.anchor != '':
-                self.tkMessage[i].place_configure(anchor=self.MessagePlace.anchor)
-            if self.MessagePlace.borderMode != '':
-                self.tkMessage[i].place_configure(bordermode=self.MessagePlace.borderMode)
-            if self.MessagePlace.height != '':
-                self.tkMessage[i].place_configure(height=int(self.MessagePlace.height))
-            if self.MessagePlace.relHeight != '':
-                self.tkMessage[i].place_configure(relheight=int(self.MessagePlace.relHeight))
-            if self.MessagePlace.width != '':
-                self.tkMessage[i].place_configure(width=int(self.MessagePlace.width))
-            if self.MessagePlace.relWidth != '':
-                self.tkMessage[i].place_configure(relwidth=int(self.MessagePlace.relWidth))
-            if self.MessagePlace.relX != '':
-                self.tkMessage[i].place_configure(relx=int(self.MessagePlace.relX))
-            if self.MessagePlace.relY != '':
-                self.tkMessage[i].place_configure(rely=int(self.MessagePlace.relY))
-            if self.MessagePlace.offsetX != '':
-                self.tkMessage[i].place_configure(x=int(self.MessagePlace.offsetX))
-            if self.MessagePlace.offsetY != '':
-                self.tkMessage[i].place_configure(y=int(self.MessagePlace.offsetY))
-        
-        
+            logging.info('[SpawnAppWindow] Creating message widget #%d' % (i+1))
+            self.tkMessage[i] = self.SpawnMessage(self.tkMessage[i], self.Message, self.MessagePlace)
+
+
         ################################################################################################################
         # CALL LOOP TO CREATE TEXT WIDGETS
         ################################################################################################################
-        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Starting "text" widget loop at t = +%f' % float(time.time()-self.startime))
+        logging.info('[SpawnAppWindow] Starting "text" widget loop')
         for i in range(0, self.textCount):
             self.Text.iniFile = self.TextPlace.iniFile = self.inifile
             self.Text.section = self.TextPlace.section = str("text" + str(i+1))
-
             self.Text = tkinterText.Text.read_settings(self.Text)
-            self.tkText[i] = tk.Text()
-            if self.Text.autoSeparators != "":
-                self.tkText[i].config(autoseparators=self.Text.autoSeparators)
-            if self.Text.backgroundColor != "":
-                self.tkText[i].config(bg=self.Text.backgroundColor)
-            if self.Text.backgroundStipple != "":
-                self.tkText[i].config(bgstipple=self.Text.backgroundStipple)
-            if self.Text.borderwidth != "":
-                self.tkText[i].config(bd=int(self.Text.borderwidth))
-            if self.Text.foregroundStipple != "":
-                self.tkText[i].config(fgstipple=self.Text.foregroundStipple)
-            if self.Text.cursor != "":
-                self.tkText[i].config(cursor=self.Text.cursor)
-            if self.Text.exportSelection != "":
-                self.tkText[i].config(exportselection=self.Text.exportSelection)
-            if self.Text.font != "" and self.Text.fontSize != "":
-                self.tkText[i].config(font=(self.Text.font, int(self.Text.fontSize)))
-            if self.Text.foregroundColor != "":
-                self.tkText[i].config(foreground=self.Text.foregroundColor)
-            if self.Text.foregroundStipple != "":
-                self.tkText[i].config(fgstipple=self.Text.foregroundStipple)
-            if self.Text.height != "":
-                self.tkText[i].config(height=int(self.Text.height))
-            if self.Text.highlightBackgroundColor != "":
-                self.tkText[i].config(highlightbackground=self.Text.highlightBackgroundColor)
-            if self.Text.highlightColor != "":
-                self.tkText[i].config(highlightcolor=self.Text.highlightColor)
-            if self.Text.highlightThickness != "":
-                self.tkText[i].config(highlightthickness=int(self.Text.highlightThickness))
-            if self.Text.insertBackground != "":
-                self.tkText[i].config(insertbackground=self.Text.insertBackground)
-            if self.Text.insertBorderwidth != "":
-                self.tkText[i].config(insertBorderwidth=int(self.Text.insertBorderwidth))
-            if self.Text.insertOffTime != "":
-                self.tkText[i].config(insertOffTime=int(self.Text.insertOffTime))
-            if self.Text.insertOnTime != "":
-                self.tkText[i].config(insertOnTime=int(self.Text.insertOnTime))
-            if self.Text.insertWidth != "":
-                self.tkText[i].config(insertWidth=int(self.Text.insertWidth))
-            #if self.Text.justify != "":
-            #    self.tkText[i].config(justify=self.Text.justify)
-            if self.Text.lmargin1 != "":
-                self.tkText[i].config(lmargin1=int(self.Text.lmargin1))
-            if self.Text.lmargin2 != "":
-                self.tkText[i].config(lmargin2=int(self.Text.lmargin2))
-            if self.Text.maxUndo != "":
-                self.tkText[i].config(maxundo=int(self.Text.maxUndo))
-            if self.Text.padX != "":
-                self.tkText[i].config(padx=int(self.Text.padX))
-            if self.Text.padY != "":
-                self.tkText[i].config(pady=int(self.Text.padY))
-            if self.Text.offset != "":
-                self.tkText[i].config(offset=int(self.Text.offset))
-            if self.Text.overstrike != "":
-                self.tkText[i].config(overstrike=self.Text.overstrike)
-            if self.Text.relief != "":
-                self.tkText[i].config(offset=self.Text.relief)
-            if self.Text.rmargin != "":
-                self.tkText[i].config(overstrike=int(self.Text.rmargin))
-            if self.Text.selectBackgroundColor != "":
-                self.tkText[i].config(selectbackground=self.Text.selectBackgroundColor)
-            if self.Text.selectForegroundColor != "":
-                self.tkText[i].config(selectforeground=self.Text.selectForegroundColor)
-            if self.Text.selectBorderwidth != "":
-                self.tkText[i].config(selectborderwidth=int(self.Text.selectBorderwidth))
-            if self.Text.setGrid != "":
-                self.tkText[i].config(setgrid=self.Text.SetGrid)
-            if self.Text.spacing1 != "":
-                self.tkText[i].config(spacing1=int(self.Text.spacing1))
-            if self.Text.spacing2 != "":
-                self.tkText[i].config(spacing2=int(self.Text.spacing2))
-            if self.Text.spacing3 != "":
-                self.tkText[i].config(spacing3=int(self.Text.spacing3))
-            if self.Text.state != "":
-                self.tkText[i].config(state=self.Text.state)
-            if self.Text.tabs != "":
-                self.tkText[i].config(tabs=self.Text.tabs)
-            if self.Text.takeFocus != "":
-                self.tkText[i].config(takefocus=self.Text.takeFocus)
-            if self.Text.text != "":
-                self.tkText[i].insert(tk.END, self.Text.text)
-            if self.Text.underline != "":
-                self.tkText[i].config(underline=self.Text.underline)
-            if self.Text.undo != "":
-                self.tkText[i].config(undo=int(self.Text.undo))
-            if self.Text.width != "":
-                self.tkText[i].config(width=int(self.Text.width))
-            if self.Text.wrap != "":
-                self.tkText[i].config(wrap=self.Text.wrap)
-            if self.Text.xScrollCommand != "":
-                self.tkText[i].config(xscrollcommand=int(self.Text.xScrollCommand))
-            if self.Text.yScrollCommand != "":
-                self.tkText[i].config(yscrollcommand=int(self.Text.yScrollCommand))
-
             self.TextPlace = tkinterPlace.Place.read_settings(self.TextPlace)
-            self.tkText[i].place()
-            if self.TextPlace.anchor != '':
-                self.tkText[i].place_configure(anchor=self.TextPlace.anchor)
-            if self.TextPlace.borderMode != '':
-                self.tkText[i].place_configure(bordermode=self.TextPlace.borderMode)
-            if self.TextPlace.height != '':
-                self.tkText[i].place_configure(height=int(self.TextPlace.height))
-            if self.TextPlace.relHeight != '':
-                self.tkText[i].place_configure(relheight=int(self.TextPlace.relHeight))
-            if self.TextPlace.width != '':
-                self.tkText[i].place_configure(width=int(self.TextPlace.width))
-            if self.TextPlace.relWidth != '':
-                self.tkText[i].place_configure(relwidth=int(self.TextPlace.relWidth))
-            if self.TextPlace.relX != '':
-                self.tkText[i].place_configure(relx=int(self.TextPlace.relX))
-            if self.TextPlace.relY != '':
-                self.tkText[i].place_configure(rely=int(self.TextPlace.relY))
-            if self.TextPlace.offsetX != '':
-                self.tkText[i].place_configure(x=int(self.TextPlace.offsetX))
-            if self.TextPlace.offsetY != '':
-                self.tkText[i].place_configure(y=int(self.TextPlace.offsetY))
-        
-        
+            logging.info('[SpawnAppWindow] Creating text widget #%d' % (i+1))
+            self.tkText[i] = self.SpawnText(self.tkText[i], self.Text, self.TextPlace)
+
+
         ################################################################################################################
         # CALL LOOP TO CREATE BUTTON WIDGETS
         ################################################################################################################
-        logging.info('[SpawnGuiFromIni.SpawnAppWindow] Starting "button" widget loop at t = +%f' %
-                     float(time.time()-self.startime))
+        logging.info('[SpawnAppWindow] Starting "button" widget loop')
         for i in range(0, self.buttonCount):
             self.Button.iniFile = self.ButtonPlace.iniFile = self.inifile
             self.Button.section = self.ButtonPlace.section = "button" + str(i+1)
-
             self.Button = tkinterButton.Button.read_settings(self.Button)
-            self.tkButton[i] = tk.Button()
-            if self.Button.backgroundColor != '':
-                self.tkButton[i].config(background=self.Button.backgroundColor)
-            if self.Button.bitmap != '':
-                self.tkButton[i].config(bitmap=self.Button.bitmap)
-            if self.Button.borderwidth != '':
-                self.tkButton[i].config(borderwidth=int(self.Button.borderwidth))
-            if self.Button.command != '':
-                self.tkButton[i].config(command=lambda instance=int(self.Button.command): gui_callbacks.callback(self, instance))
-            if self.Button.compound != '':
-                self.tkButton[i].config(compound=self.Button.compound)
-            if self.Button.cursor != '':
-                self.tkButton[i].config(cursor=self.Button.cursor)
-            if self.Button.default != '':
-                self.tkButton[i].config(default=self.Button.default)
-            if self.Button.disableForeground != '':
-                self.tkButton[i].config(disableforeground=self.Button.disableForeground)
-            if self.Button.font != '' and self.Button.fontSize != '':
-                self.tkButton[i].config(font=(self.Button.font, int(self.Button.fontSize)))
-            if self.Button.foregroundColor != '':
-                self.tkButton[i].config(foreground=self.Button.foregroundColor)
-            if self.Button.height != '':
-                self.tkButton[i].config(height=int(self.Button.height))
-            if self.Button.highlightBackgroundColor != '':
-                self.tkButton[i].config(highlightbackground=self.Button.highlightBackgroundColor)
-            if self.Button.highlightColor != '':
-                self.tkButton[i].config(highlightcolor=self.Button.highlightColor)
-            if self.Button.highlightThickness != '':
-                self.tkButton[i].config(highlightthickness=int(self.Button.highlightThickness))
-            if self.Button.image != '':
-                self.tkButton[i].config(image=self.Button.image)
-            if self.Button.justify != '':
-                self.tkButton[i].config(justify=self.Button.justify)
-            if self.Button.overRelief != '':
-                self.tkButton[i].config(overrelief=self.Button.overRelief)
-            if self.Button.padX != '':
-                self.tkButton[i].config(padx=int(self.Button.padX))
-            if self.Button.padY != '':
-                self.tkButton[i].config(pady=int(self.Button.padY))
-            if self.Button.relief != '':
-                self.tkButton[i].config(relief=self.Button.relief)
-            if self.Button.repeatDelay != '':
-                self.tkButton[i].config(repeatdelay=int(self.Button.repeatDelay))
-            if self.Button.repeatInterval != '':
-                self.tkButton[i].config(repeatinterval=int(self.Button.repeatInterval))
-            if self.Button.state != '':
-                self.tkButton[i].config(state=self.Button.state)
-            if self.Button.takeFocus != '':
-                self.tkButton[i].config(takefocus=self.Button.takeFocus)
-            if self.Button.text != '':
-                self.tkButton[i].config(text=self.Button.text)
-            if self.Button.textVariable != '':
-                self.tkButton[i].config(textvariable=self.Button.textVariable)
-            if self.Button.underline != '':
-                self.tkButton[i].config(underline=self.Button.underline)
-            if self.Button.width != '':
-                self.tkButton[i].config(width=int(self.Button.width))
-            if self.Button.wrapLength != '':
-                self.tkButton[i].config(wraplength=int(self.Button.wrapLength))
-
             self.ButtonPlace = tkinterPlace.Place.read_settings(self.ButtonPlace)
-            self.tkButton[i].place()            
-            if self.ButtonPlace.anchor != '':
-                self.tkButton[i].place_configure(anchor=self.ButtonPlace.anchor)
-            if self.ButtonPlace.borderMode != '':
-                self.tkButton[i].place_configure(bordermode=self.ButtonPlace.borderMode)
-            if self.ButtonPlace.height != '':
-                self.tkButton[i].place_configure(height=int(self.ButtonPlace.height))
-            if self.ButtonPlace.width != '':
-                self.tkButton[i].place_configure(width=int(self.ButtonPlace.width))
-            if self.ButtonPlace.relHeight != '':
-                self.tkButton[i].place_configure(relheight=int(self.ButtonPlace.relHeight))
-            if self.ButtonPlace.relWidth != '':
-                self.tkButton[i].place_configure(relwidth=int(self.ButtonPlace.relWidth))
-            if self.ButtonPlace.relX != '':
-                self.tkButton[i].place_configure(relx=int(self.ButtonPlace.relX))
-            if self.ButtonPlace.relY != '':
-                self.tkButton[i].place_configure(rely=int(self.ButtonPlace.relY))
-            if self.ButtonPlace.offsetX != '':
-                self.tkButton[i].place_configure(x=int(self.ButtonPlace.offsetX))
-            if self.ButtonPlace.offsetY != '':
-                self.tkButton[i].place_configure(y=int(self.ButtonPlace.offsetY))
+            logging.info('[SpawnAppWindow] Creating button widget #%d' % (i+1))
+            self.tkButton[i] = self.SpawnButton(self.tkButton[i], self.Button, self.ButtonPlace)
 
+        logging.info('[SpawnAppWindow] Starting tkinter main loop')
         self.root.mainloop()
+        return self
+
+
+
+    def SpawnFrame(self, frame, settings, placesettings):
+        self.frame = frame
+        self.frame = tk.Frame()
+        self.settings = settings
+        self.placesettings = placesettings
+        if self.settings.backgroundColor != '':
+            self.frame.config(background=self.settings.backgroundColor)
+        if self.settings.borderwidth != '':
+            self.frame.config(borderwidth=int(self.settings.borderwidth))
+        if self.settings.colormap != '':
+            self.frame.config(colormap=self.settings.colormap)
+        if self.settings.container != '':
+            self.frame.config(container=self.settings.container)
+        if self.settings.cursor != '':
+            self.frame.config(cursor=self.settings.cursor)
+        if self.settings.height != '':
+            self.frame.config(height=int(self.settings.height))
+        if self.settings.highlightBackgroundColor != '':
+            self.frame.config(highlightbackground=self.settings.highlightBackgroundColor)
+        if self.settings.highlightColor != '':
+            self.frame.config(highlightcolor=self.settings.highlightColor)
+        if self.settings.highlightThickness != '':
+            self.frame.config(highlightthickness=int(self.settings.highlightThickness))
+        if self.settings.padX != '':
+            self.frame.config(padx=int(self.settings.padX))
+        if self.settings.padY != '':
+            self.frame.config(pady=int(self.settings.padY))
+        if self.settings.relief != '':
+            self.frame.config(relief=self.settings.relief)
+        if self.settings.takeFocus != '':
+            self.frame.config(takefocus=self.settings.takeFocus)
+        if self.settings.visual != '':
+            self.frame.config(visual=self.settings.visual)
+        if self.settings.width != '':
+            self.frame.config(width=int(self.settings.width))
+        self.frame.place()
+        if self.placesettings.anchor != '':
+            self.frame.place_configure(anchor=self.placesettings.anchor)
+        if self.placesettings.borderMode != '':
+            self.frame.place_configure(bordermode=self.placesettings.borderMode)
+        if self.placesettings.height != '':
+            self.frame.place_configure(height=int(self.placesettings.height))
+        if self.placesettings.width != '':
+            self.frame.place_configure(width=int(self.placesettings.width))
+        if self.placesettings.relHeight != '':
+            self.frame.place_configure(relheight=float(self.placesettings.relHeight))
+        if self.placesettings.relWidth != '':
+            self.frame.place_configure(relwidth=float(self.placesettings.relWidth))
+        if self.placesettings.relX != '':
+            self.frame.place_configure(relx=float(self.placesettings.relX))
+        if self.placesettings.relY != '':
+            self.frame.place_configure(rely=float(self.placesettings.relY))
+        if self.placesettings.offsetX != '':
+            self.frame.place_configure(x=int(self.placesettings.offsetX))
+        if self.placesettings.offsetY != '':
+            self.frame.place_configure(y=int(self.placesettings.offsetY))
+        return self.frame
+
+
+    def SpawnMessage(self, message, settings, placesettings):
+        self.message = message
+        self.message = tk.Message()
+        self.settings = settings
+        self.placesettings = placesettings
+        if self.settings.anchor != "":
+            self.message.config(anchor=self.settings.anchor)
+        if self.settings.aspect != "":
+            self.message.config(aspect=self.settings.aspect)
+        if self.settings.backgroundColor != "":
+            self.message.config(background=self.settings.backgroundColor)
+        if self.settings.borderwidth != "":
+            self.message.config(borderwidth=self.settings.borderwidth)
+        if self.settings.cursor != "":
+            self.message.config(cursor=self.settings.cursor)
+        if self.settings.font != "" and self.settings.fontSize != "":
+            self.message.config(font=(self.settings.font, int(self.settings.fontSize)))
+        if self.settings.foregroundColor != "":
+            self.message.config(foreground=self.settings.foregroundColor)
+        if self.settings.highlightBackground != "":
+            self.message.config(highlightbackground=self.settings.highlightBackground)
+        if self.settings.highlightBackgroundColor != "":
+            self.message.config(highlightcolor=self.settings.highlightBackgroundColor)
+        if self.settings.highlightThickness != "":
+            self.message.config(highlightthickness=int(self.settings.highlightThickness))
+        if self.settings.justify != "":
+            self.message.config(justify=self.settings.justify)
+        if self.settings.padX != "":
+            self.message.config(padx=int(self.settings.padX))
+        if self.settings.padY != "":
+            self.message.config(pady=int(self.settings.padY))
+        if self.settings.relief != "":
+            self.message.config(relief=self.settings.relief)
+        if self.settings.takeFocus != "":
+            self.message.config(takefocus=self.settings.takeFocus)
+        if self.settings.text != "":
+            self.message.config(text=self.settings.text)
+        if self.settings.textVariable != "":
+            self.message.config(textvariable=self.settings.textVariable)
+        if self.settings.width != "":
+            self.message.config(width=int(self.settings.width))
+        self.message.place()
+        if self.placesettings.anchor != '':
+            self.message.place_configure(anchor=self.placesettings.anchor)
+        if self.placesettings.borderMode != '':
+            self.message.place_configure(bordermode=self.placesettings.borderMode)
+        if self.placesettings.height != '':
+            self.message.place_configure(height=int(self.placesettings.height))
+        if self.placesettings.relHeight != '':
+            self.message.place_configure(relheight=int(self.placesettings.relHeight))
+        if self.placesettings.width != '':
+            self.message.place_configure(width=int(self.placesettings.width))
+        if self.placesettings.relWidth != '':
+            self.message.place_configure(relwidth=int(self.placesettings.relWidth))
+        if self.placesettings.relX != '':
+            self.message.place_configure(relx=int(self.placesettings.relX))
+        if self.placesettings.relY != '':
+            self.message.place_configure(rely=int(self.placesettings.relY))
+        if self.placesettings.offsetX != '':
+            self.message.place_configure(x=int(self.placesettings.offsetX))
+        if self.placesettings.offsetY != '':
+            self.message.place_configure(y=int(self.placesettings.offsetY))
+        return self.message
+
+
+    def SpawnText(self, text, settings, placesettings):
+        self.text = text
+        self.text = tk.Text()
+        self.settings = settings
+        self.placesettings = placesettings
+        if self.settings.autoSeparators != "":
+            self.text.config(autoseparators=self.settings.autoSeparators)
+        if self.settings.backgroundColor != "":
+            self.text.config(bg=self.settings.backgroundColor)
+        if self.settings.backgroundStipple != "":
+            self.text.config(bgstipple=self.settings.backgroundStipple)
+        if self.settings.borderwidth != "":
+            self.text.config(bd=int(self.settings.borderwidth))
+        if self.settings.foregroundStipple != "":
+            self.text.config(fgstipple=self.settings.foregroundStipple)
+        if self.settings.cursor != "":
+            self.text.config(cursor=self.settings.cursor)
+        if self.settings.exportSelection != "":
+            self.text.config(exportselection=self.settings.exportSelection)
+        if self.settings.font != "" and self.settings.fontSize != "":
+            self.text.config(font=(self.settings.font, int(self.settings.fontSize)))
+        if self.settings.foregroundColor != "":
+            self.text.config(foreground=self.settings.foregroundColor)
+        if self.settings.foregroundStipple != "":
+            self.text.config(fgstipple=self.settings.foregroundStipple)
+        if self.settings.height != "":
+            self.text.config(height=int(self.settings.height))
+        if self.settings.highlightBackgroundColor != "":
+            self.text.config(highlightbackground=self.settings.highlightBackgroundColor)
+        if self.settings.highlightColor != "":
+            self.text.config(highlightcolor=self.settings.highlightColor)
+        if self.settings.highlightThickness != "":
+            self.text.config(highlightthickness=int(self.settings.highlightThickness))
+        if self.settings.insertBackground != "":
+            self.text.config(insertbackground=self.settings.insertBackground)
+        if self.settings.insertBorderwidth != "":
+            self.text.config(insertBorderwidth=int(self.settings.insertBorderwidth))
+        if self.settings.insertOffTime != "":
+            self.text.config(insertOffTime=int(self.settings.insertOffTime))
+        if self.settings.insertOnTime != "":
+            self.text.config(insertOnTime=int(self.settings.insertOnTime))
+        if self.settings.insertWidth != "":
+            self.text.config(insertWidth=int(self.settings.insertWidth))
+        if self.settings.lmargin1 != "":
+            self.text.config(lmargin1=int(self.settings.lmargin1))
+        if self.settings.lmargin2 != "":
+            self.text.config(lmargin2=int(self.settings.lmargin2))
+        if self.settings.maxUndo != "":
+            self.text.config(maxundo=int(self.settings.maxUndo))
+        if self.settings.padX != "":
+            self.text.config(padx=int(self.settings.padX))
+        if self.settings.padY != "":
+            self.text.config(pady=int(self.settings.padY))
+        if self.settings.offset != "":
+            self.text.config(offset=int(self.settings.offset))
+        if self.settings.overstrike != "":
+            self.text.config(overstrike=self.settings.overstrike)
+        if self.settings.relief != "":
+            self.text.config(offset=self.settings.relief)
+        if self.settings.rmargin != "":
+            self.text.config(overstrike=int(self.settings.rmargin))
+        if self.settings.selectBackgroundColor != "":
+            self.text.config(selectbackground=self.settings.selectBackgroundColor)
+        if self.settings.selectForegroundColor != "":
+            self.text.config(selectforeground=self.settings.selectForegroundColor)
+        if self.settings.selectBorderwidth != "":
+            self.text.config(selectborderwidth=int(self.settings.selectBorderwidth))
+        if self.settings.setGrid != "":
+            self.text.config(setgrid=self.settings.SetGrid)
+        if self.settings.spacing1 != "":
+            self.text.config(spacing1=int(self.settings.spacing1))
+        if self.settings.spacing2 != "":
+            self.text.config(spacing2=int(self.settings.spacing2))
+        if self.settings.spacing3 != "":
+            self.text.config(spacing3=int(self.settings.spacing3))
+        if self.settings.state != "":
+            self.text.config(state=self.settings.state)
+        if self.settings.tabs != "":
+            self.text.config(tabs=self.settings.tabs)
+        if self.settings.takeFocus != "":
+            self.text.config(takefocus=self.settings.takeFocus)
+        if self.settings.text != "":
+            self.text.insert(tk.END, self.settings.text)
+        if self.settings.underline != "":
+            self.text.config(underline=self.settings.underline)
+        if self.settings.undo != "":
+            self.text.config(undo=int(self.settings.undo))
+        if self.settings.width != "":
+            self.text.config(width=int(self.settings.width))
+        if self.settings.wrap != "":
+            self.text.config(wrap=self.settings.wrap)
+        if self.settings.xScrollCommand != "":
+            self.text.config(xscrollcommand=int(self.settings.xScrollCommand))
+        if self.settings.yScrollCommand != "":
+            self.text.config(yscrollcommand=int(self.settings.yScrollCommand))
+        self.text.place()
+        if self.placesettings.anchor != '':
+            self.text.place_configure(anchor=self.placesettings.anchor)
+        if self.placesettings.borderMode != '':
+            self.text.place_configure(bordermode=self.placesettings.borderMode)
+        if self.placesettings.height != '':
+            self.text.place_configure(height=int(self.placesettings.height))
+        if self.placesettings.relHeight != '':
+            self.text.place_configure(relheight=int(self.placesettings.relHeight))
+        if self.placesettings.width != '':
+            self.text.place_configure(width=int(self.placesettings.width))
+        if self.placesettings.relWidth != '':
+            self.text.place_configure(relwidth=int(self.placesettings.relWidth))
+        if self.placesettings.relX != '':
+            self.text.place_configure(relx=int(self.placesettings.relX))
+        if self.placesettings.relY != '':
+            self.text.place_configure(rely=int(self.placesettings.relY))
+        if self.placesettings.offsetX != '':
+            self.text.place_configure(x=int(self.placesettings.offsetX))
+        if self.placesettings.offsetY != '':
+            self.text.place_configure(y=int(self.placesettings.offsetY))
+        return self.text
+    
+
+    def SpawnButton(self, button, settings, placesettings):
+        self.button = button
+        self.button = tk.Button()
+        self.settings = settings
+        self.placesettings = placesettings
+        if self.settings.backgroundColor != '':
+            self.button.config(background=self.settings.backgroundColor)
+        if self.settings.bitmap != '':
+            self.button.config(bitmap=self.settings.bitmap)
+        if self.settings.borderwidth != '':
+            self.button.config(borderwidth=int(self.settings.borderwidth))
+        if self.settings.command != '':
+            self.button.config(command=lambda instance=int(self.settings.command):
+            gui_callbacks.callback(self, instance, self.logfile))
+        if self.settings.compound != '':
+            self.button.config(compound=self.settings.compound)
+        if self.settings.cursor != '':
+            self.button.config(cursor=self.settings.cursor)
+        if self.settings.default != '':
+            self.button.config(default=self.settings.default)
+        if self.settings.disableForeground != '':
+            self.button.config(disableforeground=self.settings.disableForeground)
+        if self.settings.font != '' and self.settings.fontSize != '':
+            self.button.config(font=(self.settings.font, int(self.settings.fontSize)))
+        if self.settings.foregroundColor != '':
+            self.button.config(foreground=self.settings.foregroundColor)
+        if self.settings.height != '':
+            self.button.config(height=int(self.settings.height))
+        if self.settings.highlightBackgroundColor != '':
+            self.button.config(highlightbackground=self.settings.highlightBackgroundColor)
+        if self.settings.highlightColor != '':
+            self.button.config(highlightcolor=self.settings.highlightColor)
+        if self.settings.highlightThickness != '':
+            self.button.config(highlightthickness=int(self.settings.highlightThickness))
+        if self.settings.image != '':
+            self.button.config(image=self.settings.image)
+        if self.settings.justify != '':
+            self.button.config(justify=self.settings.justify)
+        if self.settings.overRelief != '':
+            self.button.config(overrelief=self.settings.overRelief)
+        if self.settings.padX != '':
+            self.button.config(padx=int(self.settings.padX))
+        if self.settings.padY != '':
+            self.button.config(pady=int(self.settings.padY))
+        if self.settings.relief != '':
+            self.button.config(relief=self.settings.relief)
+        if self.settings.repeatDelay != '':
+            self.button.config(repeatdelay=int(self.settings.repeatDelay))
+        if self.settings.repeatInterval != '':
+            self.button.config(repeatinterval=int(self.settings.repeatInterval))
+        if self.settings.state != '':
+            self.button.config(state=self.settings.state)
+        if self.settings.takeFocus != '':
+            self.button.config(takefocus=self.settings.takeFocus)
+        if self.settings.text != '':
+            self.button.config(text=self.settings.text)
+        if self.settings.textVariable != '':
+            self.button.config(textvariable=self.settings.textVariable)
+        if self.settings.underline != '':
+            self.button.config(underline=self.settings.underline)
+        if self.settings.width != '':
+            self.button.config(width=int(self.settings.width))
+        if self.settings.wrapLength != '':
+            self.button.config(wraplength=int(self.settings.wrapLength))
+        self.button.place()            
+        if self.placesettings.anchor != '':
+            self.button.place_configure(anchor=self.placesettings.anchor)
+        if self.placesettings.borderMode != '':
+            self.button.place_configure(bordermode=self.placesettings.borderMode)
+        if self.placesettings.height != '':
+            self.button.place_configure(height=int(self.placesettings.height))
+        if self.placesettings.width != '':
+            self.button.place_configure(width=int(self.placesettings.width))
+        if self.placesettings.relHeight != '':
+            self.button.place_configure(relheight=int(self.placesettings.relHeight))
+        if self.placesettings.relWidth != '':
+            self.button.place_configure(relwidth=int(self.placesettings.relWidth))
+        if self.placesettings.relX != '':
+            self.button.place_configure(relx=int(self.placesettings.relX))
+        if self.placesettings.relY != '':
+            self.button.place_configure(rely=int(self.placesettings.relY))
+        if self.placesettings.offsetX != '':
+            self.button.place_configure(x=int(self.placesettings.offsetX))
+        if self.placesettings.offsetY != '':
+            self.button.place_configure(y=int(self.placesettings.offsetY))
+        return self.button
+
 
 
 
@@ -474,26 +470,31 @@ class SpawnAppwindow:
     # Define interface methods
     ####################################################################################################################
     def return_root(self):
+        logging.info('[return_root] Returning window object')
         return self.root
 
     def kill_root(self):
+        logging.info('[kill_root] Killing root window process')
         self.root.destroy()
         return
 
     def return_text(self, field):
-        self.field = field - 1
-        self.tkTextHandshake[self.field] = self.tkText[self.field].get("1.0", tk.END)
-        return self.tkTextHandshake[self.field]
+        self.field = field
+        self.address = self.field - 1
+        logging.info('[return_text] Returning text from text field #%d' % self.field)
+        return self.tkText[self.address].get("1.0", tk.END)
 
     def write_text(self, field, text):
-        self.field = field - 1
+        self.field = field
+        self.address = self.field - 2
         self.text = text
-        self.tkText[self.field].insert(tk.END, self.text)
+        self.tkText[self.address].insert(tk.END, self.text)
         return
 
     def clear_text(self, field):
-        self.field = field - 1
-        self.tkText[self.field].delete(1.0, tk.END)
+        self.field = field
+        self.address = self.field - 1
+        self.tkText[self.address].delete(1.0, tk.END)
         return
 
 
@@ -505,4 +506,5 @@ class SpawnAppwindow:
         
 if __name__ == "__main__":
     ioTable = int()
-    app = SpawnAppwindow('gui.ini', 'debug.log', ioTable)
+    AppWindowObject = AppWindow('gui_setup.ini', 'debug.ini', ioTable)
+    app = AppWindow.SpawnAppWindow(AppWindowObject)
