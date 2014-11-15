@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="488a74ab-b520-4c7b-9b4b-c4722243d446" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Python34\MyProjects\gui-by-ini\guibyini\gui.ini" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py" afterPath="$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/guibyini/debug.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/guibyini/gui_setup.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="guibyini.iws" />
@@ -40,7 +40,7 @@
       <file leaf-file-name="SpawnGuiFromIni.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8092567" vertical-offset="8042" max-vertical-offset="8755">
+            <state vertical-scroll-proportion="0.8103933" vertical-offset="8042" max-vertical-offset="8755">
               <caret line="507" column="19" selection-start-line="507" selection-start-column="19" selection-end-line="507" selection-end-column="19" />
               <folding />
             </state>
@@ -502,7 +502,11 @@
       <created>1415831203522</created>
       <updated>1415831203522</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="General updates">
+      <created>1416029883611</created>
+      <updated>1416029883611</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -529,6 +533,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3273743" sideWeight="0.49969077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849163" sideWeight="0.49969077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.49969077" order="6" side_tool="false" content_ui="tabs" />
@@ -536,14 +541,13 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18809272" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19891892" sideWeight="0.5003092" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1991342" sideWeight="0.5003092" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20022371" sideWeight="0.49969077" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20134228" sideWeight="0.49969077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277405" sideWeight="0.49969077" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.08759124" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -584,11 +588,11 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="General updates" />
     <MESSAGE value="Added debug log file support" />
     <MESSAGE value="General program clean-up" />
     <MESSAGE value="Split program into two threads.  First is for GUI control, second for an IO monitor that continuously runs and acts upon inputs received from the GUI." />
-    <option name="LAST_COMMIT_MESSAGE" value="Split program into two threads.  First is for GUI control, second for an IO monitor that continuously runs and acts upon inputs received from the GUI." />
+    <MESSAGE value="General updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="General updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -872,7 +876,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guibyini/SpawnGuiFromIni.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8092567" vertical-offset="8042" max-vertical-offset="8755">
+        <state vertical-scroll-proportion="0.8103933" vertical-offset="8042" max-vertical-offset="8755">
           <caret line="507" column="19" selection-start-line="507" selection-start-column="19" selection-end-line="507" selection-end-column="19" />
           <folding />
         </state>
