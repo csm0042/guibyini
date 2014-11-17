@@ -482,13 +482,13 @@ class gui(object):
 
     def return_text(self, field):
         self.field = field
-        self.address = self.field - 1
+        self.address = self.field
         logging.info('[gui.return_text] Returning text from text field #%d' % self.field)
         return self.tkText[self.address].get("1.0", tk.END)
 
     def write_text(self, field, text):
         self.field = field
-        self.address = self.field - 2
+        self.address = self.field
         self.text = text
         self.tkText[self.address].insert(tk.END, self.text)
         logging.info('[gui.write_text] Writing text to text field #%d' % self.field)
@@ -496,7 +496,7 @@ class gui(object):
 
     def clear_text(self, field):
         self.field = field
-        self.address = self.field - 2
+        self.address = self.field
         self.tkText[self.address].delete(1.0, tk.END)
         logging.info('[gui.clear_text] Clearing text to text field #%d' % self.field)
         return
