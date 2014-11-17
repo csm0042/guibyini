@@ -1,6 +1,5 @@
 __author__ = 'chris.maue'
 
-import config_parser
 
 class Message(object):
     def __init__(self):

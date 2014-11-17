@@ -6,11 +6,7 @@ __author__ = 'chris.maue'
 #######################################################################################################################
 import logging
 import os
-import sys
-
-sys.path.insert(0, 'c:/python34/MyProjects/gui-by-ini/guibyini')
-sys.path.insert(0, 'c:/python34/MyProjects/pic-rename/pic-rename')
-import SpawnGuiFromIni
+import gui_class_definition
 
 
 
@@ -43,7 +39,7 @@ logging.info('[Main] Using GUI configuration file: %s' % guiIniFile)
 #######################################################################################################################
 # Define Data types
 #######################################################################################################################
-class ApplicationIO(object):
+class application_IO(object):
     def __init__(self):
         self.input = [bool() for i in range(32)]
         self.output = [bool() for i in range(32)]
@@ -54,9 +50,9 @@ class ApplicationIO(object):
 #######################################################################################################################
 # Define Data tags used for interlocking between application window and IO monitor threads
 #######################################################################################################################
-IoTable = ApplicationIO()
-IoTableCache = ApplicationIO()
-IoTableOS = ApplicationIO()
+IoTable = application_IO()
+IoTableCache = application_IO()
+IoTableOS = application_IO()
 
 
 
@@ -65,5 +61,5 @@ IoTableOS = ApplicationIO()
 #######################################################################################################################
 # Start application window (runs in main thread)
 #######################################################################################################################
-AppWindowObject = SpawnGuiFromIni.AppWindow(guiIniFile, debugLogFile, IoTable)
-AppWindowObject.SpawnAppWindow()
+gui_object = gui_class_definition.gui(guiIniFile, debugLogFile, IoTable)
+gui_object.create_window()

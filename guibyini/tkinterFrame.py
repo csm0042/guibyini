@@ -1,6 +1,5 @@
 __author__ = 'chris.maue'
 
-import config_parser
 
 class Frame(object):
     def __init__(self):
