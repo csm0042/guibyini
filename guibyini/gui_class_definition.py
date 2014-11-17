@@ -1,4 +1,6 @@
 import logging
+import sys
+sys.path.insert(0, 'c:/python34/MyProjects/pic-rename/pic-rename')
 import gui_callbacks
 import tkinter as tk
 import widget_count
@@ -20,7 +22,8 @@ class gui(object):
         self.iotable = iotable
         self.field = int()
         self.address = int()
-        self.text = str()
+        self.text_to_write = str()
+        self.text_to_write_mem = str()
         self.place_settings = tkinterPlace.Place()
 
         logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)-8s %(message)s',
@@ -482,21 +485,23 @@ class gui(object):
 
     def return_text(self, field):
         self.field = field
-        self.address = self.field
+        self.address = self.field - 1
         logging.info('[gui.return_text] Returning text from text field #%d' % self.field)
         return self.tkText[self.address].get("1.0", tk.END)
 
-    def write_text(self, field, text):
+    def write_text(self, field, text_to_write):
         self.field = field
-        self.address = self.field
-        self.text = text
-        self.tkText[self.address].insert(tk.END, self.text)
-        logging.info('[gui.write_text] Writing text to text field #%d' % self.field)
+        self.address = self.field - 1
+        self.text_to_write = text_to_write
+        if self.text_to_write != self.text_to_write_mem:
+            self.tkText[self.address].insert(tk.END, self.text_to_write)
+            #logging.info('[gui.write_text] Writing text to text field #%d' % self.field)
+            self.text_to_write_mem = self.text_to_write
         return
 
     def clear_text(self, field):
         self.field = field
-        self.address = self.field
+        self.address = self.field - 1
         self.tkText[self.address].delete(1.0, tk.END)
         logging.info('[gui.clear_text] Clearing text to text field #%d' % self.field)
         return
