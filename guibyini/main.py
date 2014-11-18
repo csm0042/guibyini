@@ -6,7 +6,7 @@ __author__ = 'chris.maue'
 #######################################################################################################################
 import logging
 import os
-import gui_class_definition
+import gui_builder
 
 
 
@@ -61,5 +61,5 @@ IoTableOS = application_IO()
 #######################################################################################################################
 # Start application window (runs in main thread)
 #######################################################################################################################
-gui_object = gui_class_definition.gui(guiIniFile, debugLogFile, IoTable)
+gui_object = gui_builder.gui(guiIniFile, debugLogFile, IoTable)
 gui_object.create_window()
