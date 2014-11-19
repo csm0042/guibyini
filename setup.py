@@ -4,13 +4,13 @@ except ImportError:
 	from distutils.core import setup
 
 config = {
-	'description': 'Automatic File-name assigner',
+	'description': 'Generate GUI from INI',
 	'author': 'Chris Maue',
 	'author_email': 'csmaue@gmail.com',
-    'url': 'https://github.com/csm0042/autofilename.git',
-    'download_url': 'https://github.com/csm0042/autofilename.git',
+    'url': 'https://github.com/csm0042/guibyini.git',
+    'download_url': 'https://github.com/csm0042/guibyini.git',
 	'version': '1.0.0',
-	'packages': ['autofilename'],
-	'name': 'auto-file-name'
+	'packages': ['guibyini'],
+	'name': 'guibyini'
 }
 setup(**config)
