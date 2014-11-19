@@ -1,33 +1,16 @@
-from codecs import open
-from setuptools import setup, find_packages
+try:
+	from setuptools import setup
+except ImportError:
+	from distutils.core import setup
 
-
-# Get the long description from the relevant file
-with open('README.rst', encoding='utf-8') as f:
-    long_description = f.read()
-
-
-setup(name='pyskel',
-      version='0.0.1',
-      description="Skeleton of a Python package",
-      long_description=long_description,
-      classifiers=[],
-      keywords='',
-      author='Sean Gillies',
-      author_email='sean@mapbox.com',
-      url='https://github.com/mapbox/pyskel',
-      license='MIT',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      include_package_data=True,
-      zip_safe=False,
-      install_requires=[
-          'click'
-      ],
-      extras_require={
-          'test': ['pytest'],
-      },
-      entry_points="""
-      [console_scripts]
-      pyskel=pyskel.scripts:cli
-      """
-      )
+config = {
+	'description': 'Automatic File-name assigner',
+	'author': 'Chris Maue',
+	'author_email': 'csmaue@gmail.com',
+    'url': 'https://github.com/csm0042/autofilename.git',
+    'download_url': 'https://github.com/csm0042/autofilename.git',
+	'version': '1.0.0',
+	'packages': ['autofilename'],
+	'name': 'auto-file-name'
+}
+setup(**config)
